@@ -2140,6 +2140,14 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
     setting: ""
   }),
+  disableSausageGoblin: Args.flag({
+    help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+    setting: ""
+  }),
+  disableMimeShotglass: Args.flag({
+    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
+    setting: ""
+  }),
   fullDiagnostic: Args.flag({
     help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
     hidden: !0,
@@ -2199,7 +2207,7 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    if (config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
+    if (config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.disableSausageGoblin && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.disableMimeShotglass && _set("_mimeArmyShotglassUsed", !0), config.fullDiagnostic) {
       (0, import_kolmafia7.print)("Checking all effect descriptions", color);
       var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
       try {
