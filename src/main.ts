@@ -11,12 +11,16 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
     setting: "",
   }),
-  disableSausageGoblin: Args.flag({
-    help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+  disableAll: Args.flag({
+    help: "Sets other daily flags to their disabled state, and sets cleaver to safe values",
     setting: "",
   }),
-  disableMimeShotglass: Args.flag({
+  disableShotglass: Args.flag({
     help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
+    setting: "",
+  }),
+  disableSausageGoblin: Args.flag({
+    help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
     setting: "",
   }),
   fullDiagnostic: Args.flag({
@@ -88,7 +92,7 @@ export default function main(command = "help"): void {
       }
     }
 
-    if (config.cleaver) {
+    if (config.cleaver || config.disableAll) {
       print("Setting June Cleaver to safe values", color);
       visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`);
       set("_juneCleaverEncounters", 10);
@@ -96,12 +100,12 @@ export default function main(command = "help"): void {
       set("_juneCleaverFightsLeft", 30);
     }
 
-    if (config.disableSausageGoblin) {
-      set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
+    if (config.disableShotglass || config.disableAll) {
+      set("_mimeArmyShotglassUsed", true);
     }
 
-    if (config.disableMimeShotglass) {
-      set("_mimeArmyShotglassUsed", true);
+    if (config.disableSausageGoblin || config.disableAll) {
+      set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
     }
 
     if (config.fullDiagnostic) {
