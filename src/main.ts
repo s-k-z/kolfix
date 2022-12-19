@@ -1,5 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import { Effect, print, Skill, toInt, visitUrl } from "kolmafia";
+import { Effect, handlingChoice, print, Skill, toInt, visitUrl } from "kolmafia";
 import { $effect, get, set } from "libram";
 
 const config = Args.create("kolfix", "Update important KoLmafia settings", {
@@ -28,7 +28,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   max: Args.flag({
-    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology, pool, source terminal",
+    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology and rack 'em up pool skill",
     setting: "",
   }),
   maxAll: Args.flag({
@@ -43,18 +43,6 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: "",
   }),
-  sourceGram: Args.number({
-    help: "Set the number of Source Terminal GRAM chips used (enquiry rollover effect duration, max 10)",
-    setting: "",
-  }),
-  sourcePram: Args.number({
-    help: "Set the number of Source Terminal PRAM chips used (enhance effect duration, max 10)",
-    setting: "",
-  }),
-  sourceSpam: Args.number({
-    help: "Set the number of Source Terminal SPAM chips used (educate mp cost reduction, max 10)",
-    setting: "",
-  }),
 });
 
 export default function main(command = "help"): void {
@@ -64,27 +52,37 @@ export default function main(command = "help"): void {
     return;
   }
 
+  const color = "green";
+
   if (config.auto || config.fullDiagnostic) {
-    print("Checking properties");
+    print("Checking properties", color);
     visitUrl("place.php?whichplace=town_wrong");
     visitUrl("place.php?whichplace=town_right");
     visitUrl("campground.php?action=terminal");
+    if (handlingChoice()) {
+      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=status");
+      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=enhance");
+      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=enquiry");
+      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=educate");
+      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=extrude");
+      visitUrl("main.php");
+    }
     visitUrl(`desc_effect.php?whicheffect=${$effect`Puzzle Champ`.descid}`);
   }
 
   if (config.cleaver) {
-    print("Setting June Cleaver to safe values");
+    print("Setting June Cleaver to safe values", color);
     set("_juneCleaverEncounters", 10);
     set("_juneCleaverSkips", 5);
     set("_juneCleaverFightsLeft", 30);
   }
 
   if (config.fullDiagnostic) {
-    print("Checking all effect descriptions");
+    print("Checking all effect descriptions", color);
     for (const e of Effect.all()) {
       visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
     }
-    print("Checking all skill descriptions");
+    print("Checking all skill descriptions", color);
     for (const s of Skill.all()) {
       visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
     }
@@ -93,7 +91,7 @@ export default function main(command = "help"): void {
   const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
 
   if (config.gingerbread || config.maxAll) {
-    print("Unlocking everything for Gingerbread City");
+    print(`${config.maxAll ? "Unlocking" : "Toggling" } everything for Gingerbread City`, color);
     toggle("gingerAdvanceClockUnlocked");
     toggle("gingerExtraAdventures");
     toggle("gingerRetailUnlocked");
@@ -105,19 +103,13 @@ export default function main(command = "help"): void {
   if (config.love || config.maxAll) toggle("loveTunnelAvailable");
 
   if (config.max || config.maxAll) {
-    print("Maximizing properties");
+    print("Maximizing properties", color);
     config.numberology = 5;
     config.pool = 25;
-    config.sourceGram = 10;
-    config.sourcePram = 10;
-    config.sourceSpam = 10;
   }
 
   if (config.numberology) set("skillLevel144", config.numberology);
   if (config.pool) set("poolSharkCount", config.pool);
-  if (config.sourceGram) set("sourceTerminalGram", config.sourceGram);
-  if (config.sourcePram) set("sourceTerminalPram", config.sourcePram);
-  if (config.sourceSpam) set("sourceTerminalSpam", config.sourceSpam);
 
-  print("Presto fixo! All done.");
+  print("Presto fixo! All done.", color);
 }

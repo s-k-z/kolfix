@@ -16,7 +16,7 @@ __Currently supported things__:
 
 &#x2611; Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum)
 
-&#x2610; [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (partial)
+&#x2611; [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (Some properties can't be read if you've used all the resources today)
 
 &#x2611; [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.)
 
