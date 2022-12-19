@@ -15,7 +15,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     help: "Check basically everything in the game that KoLmafia knows about (WARNING: SLOW)",
     setting: "",
   }),
-  gingerbread: Args.number({
+  gingerbread: Args.flag({
     help: "Toggle all gingerbread city upgrades",
     setting: "",
   }),
