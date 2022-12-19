@@ -1957,7 +1957,7 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: ""
   }),
   maxAll: Args.flag({
-    help: "Maximize all the properties and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
+    help: "Set all the properties to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
     setting: ""
   }),
   numberology: Args.number({
@@ -1976,7 +1976,21 @@ function main() {
     return;
   }
   var color = "green";
-  if ((config.auto || config.fullDiagnostic) && ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)() && ((0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=status"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=enhance"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=enquiry"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=educate"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=extrude"), (0, import_kolmafia7.visitUrl)("main.php")), (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid))), config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
+  if (config.auto || config.fullDiagnostic) {
+    if ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)()) {
+      for (var _i = 0, _arr = ["status", "enhance", "enquiry", "educate", "extrude"]; _i < _arr.length; _i++) {
+        var text = _arr[_i];
+        (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=".concat(text));
+      }
+      (0, import_kolmafia7.visitUrl)("main.php");
+    }
+    (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid)), (0, import_kolmafia7.print)("Checking recipes", color);
+    for (var _i2 = 0, _arr2 = ["cocktail", "combine", "cook", "multi", "smith"]; _i2 < _arr2.length; _i2++) {
+      var craft = _arr2[_i2];
+      (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
+    }
+  }
+  if (config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
     (0, import_kolmafia7.print)("Checking all effect descriptions", color);
     var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
     try {
@@ -2012,6 +2026,11 @@ function main() {
       _iterator3.e(err);
     } finally {
       _iterator3.f();
+    }
+    (0, import_kolmafia7.print)("Checking recipes", color);
+    for (var _i3 = 0, _arr3 = ["cocktail", "combine", "cook", "multi", "smith"]; _i3 < _arr3.length; _i3++) {
+      var _craft = _arr3[_i3];
+      (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(_craft));
     }
   }
   var toggle = function(prop) {
