@@ -1,6 +1,6 @@
 import { Args } from "grimoire-kolmafia";
 import { Effect, handlingChoice, Item, print, Skill, toInt, visitUrl } from "kolmafia";
-import { $effect, $item, get, set } from "libram";
+import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
   auto: Args.flag({
@@ -47,85 +47,92 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
 });
 
 export default function main(command = "help"): void {
+  const color = "green";
+
   Args.fill(config, command);
   if (config.help) {
     Args.showHelp(config);
     return;
   }
 
-  const color = "green";
+  const propertyManager = new PropertiesManager();
+  propertyManager.set({ logPreferenceChange: true });
 
-  if (config.auto || config.fullDiagnostic) {
-    print("Checking properties", color);
-    visitUrl("place.php?whichplace=town_wrong");
-    visitUrl("place.php?whichplace=town_right");
+  try {
+    if (config.auto || config.fullDiagnostic) {
+      print("Checking properties", color);
+      visitUrl("place.php?whichplace=town_wrong");
+      visitUrl("place.php?whichplace=town_right");
 
-    visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
+      visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
 
-    visitUrl("campground.php?action=terminal");
-    if (handlingChoice()) {
-      for (const text of ["status", "enhance", "enquiry", "educate", "extrude"]) {
-        visitUrl(`choice.php?pwd&whichchoice=1191&option=1&input=${text}`);
+      visitUrl("campground.php?action=terminal");
+      if (handlingChoice()) {
+        for (const text of ["status", "enhance", "enquiry", "educate", "extrude"]) {
+          visitUrl(`choice.php?pwd&whichchoice=1191&option=1&input=${text}`);
+        }
+        visitUrl("main.php");
       }
-      visitUrl("main.php");
-    }
-    visitUrl(`desc_effect.php?whicheffect=${$effect`Puzzle Champ`.descid}`);
-    print("Checking recipes", color);
-    for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
-      visitUrl(`craft.php?mode=discoveries&what=${craft}`);
-    }
-  }
-
-  if (config.cleaver) {
-    print("Setting June Cleaver to safe values", color);
-    visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`);
-    set("_juneCleaverEncounters", 10);
-    set("_juneCleaverSkips", 5);
-    set("_juneCleaverFightsLeft", 30);
-  }
-
-  if (config.fullDiagnostic) {
-    print("Checking all effect descriptions", color);
-    for (const e of Effect.all()) {
-      visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
+      visitUrl(`desc_effect.php?whicheffect=${$effect`Puzzle Champ`.descid}`);
+      print("Checking recipes", color);
+      for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
+        visitUrl(`craft.php?mode=discoveries&what=${craft}`);
+      }
     }
 
-    print("Checking all skill descriptions", color);
-    for (const s of Skill.all()) {
-      visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
+    if (config.cleaver) {
+      print("Setting June Cleaver to safe values", color);
+      visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`);
+      set("_juneCleaverEncounters", 10);
+      set("_juneCleaverSkips", 5);
+      set("_juneCleaverFightsLeft", 30);
     }
 
-    print("Checking all item descriptions", color);
-    for (const i of Item.all()) {
-      visitUrl(`desc_item.php?whichitem=${i.descid}`);
+    if (config.fullDiagnostic) {
+      print("Checking all effect descriptions", color);
+      for (const e of Effect.all()) {
+        visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
+      }
+
+      print("Checking all skill descriptions", color);
+      for (const s of Skill.all()) {
+        visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
+      }
+
+      print("Checking all item descriptions", color);
+      for (const i of Item.all()) {
+        visitUrl(`desc_item.php?whichitem=${i.descid}`);
+      }
     }
+
+    const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
+
+    if (config.gingerbread || config.maxAll) {
+      print(`${config.maxAll ? "Unlocking" : "Toggling"} everything for Gingerbread City`, color);
+      toggle("gingerAdvanceClockUnlocked");
+      toggle("gingerExtraAdventures");
+      toggle("gingerRetailUnlocked");
+      toggle("gingerSewersUnlocked");
+    }
+
+    if (config.glitch) set("glitchItemImplementationCount", config.glitch);
+
+    if (config.love || config.maxAll) {
+      print(`${config.maxAll ? "Unlocking" : "Toggling"} Tunnel of L.O.V.E.`, color);
+      toggle("loveTunnelAvailable");
+    }
+
+    if (config.max || config.maxAll) {
+      print("Maximizing properties", color);
+      config.numberology = 5;
+      config.pool = 25;
+    }
+
+    if (config.numberology) set("skillLevel144", config.numberology);
+    if (config.pool) set("poolSharkCount", config.pool);
+
+    print("Presto fixo! All done.", color);
+  } finally {
+    propertyManager.resetAll();
   }
-
-  const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
-
-  if (config.gingerbread || config.maxAll) {
-    print(`${config.maxAll ? "Unlocking" : "Toggling"} everything for Gingerbread City`, color);
-    toggle("gingerAdvanceClockUnlocked");
-    toggle("gingerExtraAdventures");
-    toggle("gingerRetailUnlocked");
-    toggle("gingerSewersUnlocked");
-  }
-
-  if (config.glitch) set("glitchItemImplementationCount", config.glitch);
-
-  if (config.love || config.maxAll) {
-    print(`${config.maxAll ? "Unlocking" : "Toggling"} Tunnel of L.O.V.E.`, color);
-    toggle("loveTunnelAvailable");
-  }
-
-  if (config.max || config.maxAll) {
-    print("Maximizing properties", color);
-    config.numberology = 5;
-    config.pool = 25;
-  }
-
-  if (config.numberology) set("skillLevel144", config.numberology);
-  if (config.pool) set("poolSharkCount", config.pool);
-
-  print("Presto fixo! All done.", color);
 }
