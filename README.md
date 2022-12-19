@@ -6,10 +6,10 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 __Updated via `auto`:__
 
- * Crafting Discoveries
- * Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
+ * Crafting Discoveries/Recipes Learned
  * Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
  * [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (Some properties can't be read if you've used all the resources today)
+ * Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
 
 __Requires Individual Setting or `maxAll`:__
 

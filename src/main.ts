@@ -2,7 +2,7 @@ import { Args } from "grimoire-kolmafia";
 import { Effect, handlingChoice, Item, print, Skill, toInt, visitUrl } from "kolmafia";
 import { $effect, $item, get, set } from "libram";
 
-const config = Args.create("kolfix", "Update important KoLmafia settings", {
+const config = Args.create("kolfix", "For updating important KoLmafia settings", {
   auto: Args.flag({
     help: "Check any properties that can be automatically updated",
     setting: "",
@@ -13,6 +13,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
   }),
   fullDiagnostic: Args.flag({
     help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
+    hidden: true,
     setting: "",
   }),
   gingerbread: Args.flag({
