@@ -32,7 +32,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   maxAll: Args.flag({
-    help: "Maximize all the properties and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
+    help: "Set all the properties to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
     setting: "",
   }),
   numberology: Args.number({
@@ -60,14 +60,16 @@ export default function main(command = "help"): void {
     visitUrl("place.php?whichplace=town_right");
     visitUrl("campground.php?action=terminal");
     if (handlingChoice()) {
-      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=status");
-      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=enhance");
-      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=enquiry");
-      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=educate");
-      visitUrl("choice.php?pwd&whichchoice=1191&option=1&input=extrude");
+      for (const text of ["status", "enhance", "enquiry", "educate", "extrude"]) {
+        visitUrl(`choice.php?pwd&whichchoice=1191&option=1&input=${text}`);
+      }
       visitUrl("main.php");
     }
     visitUrl(`desc_effect.php?whicheffect=${$effect`Puzzle Champ`.descid}`);
+    print("Checking recipes", color);
+    for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
+      visitUrl(`craft.php?mode=discoveries&what=${craft}`);
+    }
   }
 
   if (config.cleaver) {
@@ -83,6 +85,7 @@ export default function main(command = "help"): void {
     for (const e of Effect.all()) {
       visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
     }
+
     print("Checking all skill descriptions", color);
     for (const s of Skill.all()) {
       visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
@@ -91,6 +94,11 @@ export default function main(command = "help"): void {
     print("Checking all item descriptions", color);
     for (const i of Item.all()) {
       visitUrl(`desc_item.php?whichitem=${i.descid}`);
+    }
+
+    print("Checking recipes", color);
+    for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
+      visitUrl(`craft.php?mode=discoveries&what=${craft}`);
     }
   }
 
