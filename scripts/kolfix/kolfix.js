@@ -1927,7 +1927,7 @@ function _arrayLikeToArray3(arr, len) {
 function _taggedTemplateLiteral(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
-var config = Args.create("kolfix", "Update important KoLmafia settings", {
+var config = Args.create("kolfix", "For updating important KoLmafia settings", {
   auto: Args.flag({
     help: "Check any properties that can be automatically updated",
     setting: ""
@@ -1938,6 +1938,7 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
   }),
   fullDiagnostic: Args.flag({
     help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
+    hidden: !0,
     setting: ""
   }),
   gingerbread: Args.flag({
