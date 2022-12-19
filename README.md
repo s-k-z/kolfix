@@ -37,7 +37,7 @@ kolfix
 
 __Examples__:
 
-Set the June Cleaver counters to safe values, such that other scripts can continue automating with it:
+Set today's June Cleaver counters to safe values, for other scripts to continue automating with it (also resets on rollover/ascension):
 ```
 kolfix cleaver
 ```
