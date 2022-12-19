@@ -1874,7 +1874,7 @@ var import_kolmafia5 = require("kolmafia");
 
 // src/main.ts
 var import_kolmafia7 = require("kolmafia");
-var _templateObject;
+var _templateObject, _templateObject2;
 function _createForOfIteratorHelper3(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
@@ -1937,7 +1937,7 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: ""
   }),
   fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game that KoLmafia knows about (WARNING: SLOW)",
+    help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
     setting: ""
   }),
   gingerbread: Args.flag({
@@ -1953,7 +1953,7 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: ""
   }),
   max: Args.flag({
-    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology, pool, source terminal",
+    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology and rack 'em up pool skill",
     setting: ""
   }),
   maxAll: Args.flag({
@@ -1967,18 +1967,6 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
   pool: Args.number({
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: ""
-  }),
-  sourceGram: Args.number({
-    help: "Set the number of Source Terminal GRAM chips used (enquiry rollover effect duration, max 10)",
-    setting: ""
-  }),
-  sourcePram: Args.number({
-    help: "Set the number of Source Terminal PRAM chips used (enhance effect duration, max 10)",
-    setting: ""
-  }),
-  sourceSpam: Args.number({
-    help: "Set the number of Source Terminal SPAM chips used (educate mp cost reduction, max 10)",
-    setting: ""
   })
 });
 function main() {
@@ -1987,8 +1975,9 @@ function main() {
     Args.showHelp(config);
     return;
   }
-  if ((config.auto || config.fullDiagnostic) && ((0, import_kolmafia7.print)("Checking properties"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid))), config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values"), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
-    (0, import_kolmafia7.print)("Checking all effect descriptions");
+  var color = "green";
+  if ((config.auto || config.fullDiagnostic) && ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)() && ((0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=status"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=enhance"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=enquiry"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=educate"), (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=extrude"), (0, import_kolmafia7.visitUrl)("main.php")), (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid))), config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
+    (0, import_kolmafia7.print)("Checking all effect descriptions", color);
     var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done; ) {
@@ -2000,7 +1989,7 @@ function main() {
     } finally {
       _iterator.f();
     }
-    (0, import_kolmafia7.print)("Checking all skill descriptions");
+    (0, import_kolmafia7.print)("Checking all skill descriptions", color);
     var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step2;
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
@@ -2012,11 +2001,23 @@ function main() {
     } finally {
       _iterator2.f();
     }
+    (0, import_kolmafia7.print)("Checking all item descriptions", color);
+    var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step3;
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
+        var i = _step3.value;
+        (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
   }
   var toggle = function(prop) {
     return _set(prop, config.maxAll || !get(prop));
   };
-  (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("Unlocking everything for Gingerbread City"), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && toggle("loveTunnelAvailable"), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties"), config.numberology = 5, config.pool = 25, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), (0, import_kolmafia7.print)("Presto fixo! All done.");
+  (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && toggle("loveTunnelAvailable"), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties", color), config.numberology = 5, config.pool = 25), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
