@@ -1085,7 +1085,7 @@ __export(main_exports, {
 module.exports = __toCommonJS(main_exports);
 
 // node_modules/grimoire-kolmafia/dist/args.js
-var import_kolmafia2 = require("kolmafia");
+var import_kolmafia3 = require("kolmafia");
 
 // node_modules/core-js/modules/es.object.entries.js
 var $ = require_export(), $entries = require_object_to_array().entries;
@@ -1203,7 +1203,10 @@ function _set(property, value) {
   (0, import_kolmafia.setProperty)(property, stringValue);
 }
 
-// node_modules/grimoire-kolmafia/dist/args.js
+// node_modules/libram/dist/template-string.js
+var import_kolmafia2 = require("kolmafia");
+
+// node_modules/libram/dist/utils.js
 function _createForOfIteratorHelper(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
@@ -1248,6 +1251,96 @@ function _unsupportedIterableToArray(o, minLen) {
   }
 }
 function _arrayLikeToArray(arr, len) {
+  (len == null || len > arr.length) && (len = arr.length);
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
+function splitByCommasWithEscapes(str) {
+  var returnValue = [], ignoreNext = !1, currentString = "", _iterator2 = _createForOfIteratorHelper(str.split("")), _step2;
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+      var char = _step2.value;
+      char === "\\" ? ignoreNext = !0 : (char == "," && !ignoreNext ? (returnValue.push(currentString.trim()), currentString = "") : currentString += char, ignoreNext = !1);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
+  }
+  return returnValue.push(currentString.trim()), returnValue;
+}
+
+// node_modules/libram/dist/template-string.js
+var concatTemplateString = function(literals) {
+  for (var _len = arguments.length, placeholders = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++)
+    placeholders[_key - 1] = arguments[_key];
+  return literals.raw.reduce(function(acc, literal, i) {
+    var _placeholders$i;
+    return acc + literal + ((_placeholders$i = placeholders[i]) !== null && _placeholders$i !== void 0 ? _placeholders$i : "");
+  }, "");
+}, createSingleConstant = function(Type) {
+  var tagFunction = function(literals) {
+    for (var _len2 = arguments.length, placeholders = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++)
+      placeholders[_key2 - 1] = arguments[_key2];
+    var input = concatTemplateString.apply(void 0, [literals].concat(placeholders));
+    return Type.get(input);
+  };
+  return tagFunction.none = Type.none, tagFunction;
+}, createPluralConstant = function(Type) {
+  return function(literals) {
+    for (var _len3 = arguments.length, placeholders = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++)
+      placeholders[_key3 - 1] = arguments[_key3];
+    var input = concatTemplateString.apply(void 0, [literals].concat(placeholders));
+    return input === "" ? Type.all() : Type.get(splitByCommasWithEscapes(input));
+  };
+}, $bounty = createSingleConstant(import_kolmafia2.Bounty), $bounties = createPluralConstant(import_kolmafia2.Bounty), $class = createSingleConstant(import_kolmafia2.Class), $classes = createPluralConstant(import_kolmafia2.Class), $coinmaster = createSingleConstant(import_kolmafia2.Coinmaster), $coinmasters = createPluralConstant(import_kolmafia2.Coinmaster), $effect = createSingleConstant(import_kolmafia2.Effect), $effects = createPluralConstant(import_kolmafia2.Effect), $element = createSingleConstant(import_kolmafia2.Element), $elements = createPluralConstant(import_kolmafia2.Element), $familiar = createSingleConstant(import_kolmafia2.Familiar), $familiars = createPluralConstant(import_kolmafia2.Familiar), $item = createSingleConstant(import_kolmafia2.Item), $items = createPluralConstant(import_kolmafia2.Item), $location = createSingleConstant(import_kolmafia2.Location), $locations = createPluralConstant(import_kolmafia2.Location), $monster = createSingleConstant(import_kolmafia2.Monster), $monsters = createPluralConstant(import_kolmafia2.Monster), $phylum = createSingleConstant(import_kolmafia2.Phylum), $phyla = createPluralConstant(import_kolmafia2.Phylum), $servant = createSingleConstant(import_kolmafia2.Servant), $servants = createPluralConstant(import_kolmafia2.Servant), $skill = createSingleConstant(import_kolmafia2.Skill), $skills = createPluralConstant(import_kolmafia2.Skill), $slot = createSingleConstant(import_kolmafia2.Slot), $slots = createPluralConstant(import_kolmafia2.Slot), $stat = createSingleConstant(import_kolmafia2.Stat), $stats = createPluralConstant(import_kolmafia2.Stat), $thrall = createSingleConstant(import_kolmafia2.Thrall), $thralls = createPluralConstant(import_kolmafia2.Thrall), $path = createSingleConstant(import_kolmafia2.Path), $paths = createPluralConstant(import_kolmafia2.Path);
+
+// node_modules/grimoire-kolmafia/dist/args.js
+function _createForOfIteratorHelper2(o, allowArrayLike) {
+  var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (!it) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray2(o)) || allowArrayLike && o && typeof o.length == "number") {
+      it && (o = it);
+      var i = 0, F = function() {
+      };
+      return { s: F, n: function() {
+        return i >= o.length ? { done: !0 } : { done: !1, value: o[i++] };
+      }, e: function(_e2) {
+        throw _e2;
+      }, f: F };
+    }
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var normalCompletion = !0, didErr = !1, err;
+  return { s: function() {
+    it = it.call(o);
+  }, n: function() {
+    var step = it.next();
+    return normalCompletion = step.done, step;
+  }, e: function(_e3) {
+    didErr = !0, err = _e3;
+  }, f: function() {
+    try {
+      !normalCompletion && it.return != null && it.return();
+    } finally {
+      if (didErr)
+        throw err;
+    }
+  } };
+}
+function _unsupportedIterableToArray2(o, minLen) {
+  if (!!o) {
+    if (typeof o == "string")
+      return _arrayLikeToArray2(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
+      return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+      return _arrayLikeToArray2(o, minLen);
+  }
+}
+function _arrayLikeToArray2(arr, len) {
   (len == null || len > arr.length) && (len = arr.length);
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
@@ -1322,7 +1415,7 @@ var Args = /* @__PURE__ */ function() {
         return option[0];
       });
       if ("default" in spec && raw_options) {
-        var _iterator = _createForOfIteratorHelper(spec.default), _step;
+        var _iterator = _createForOfIteratorHelper2(spec.default), _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done; ) {
             var default_entry = _step.value;
@@ -1411,7 +1504,7 @@ var Args = /* @__PURE__ */ function() {
     key: "class",
     value: function(spec) {
       return this.custom(spec, function(value) {
-        var match = import_kolmafia2.Class.get(value);
+        var match = import_kolmafia3.Class.get(value);
         if (match.toString().toUpperCase() === value.toString().toUpperCase() || !isNaN(Number(value)))
           return match;
       }, "CLASS");
@@ -1424,7 +1517,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "effect",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Effect.get, "EFFECT");
+      return this.custom(spec, import_kolmafia3.Effect.get, "EFFECT");
     }
   }, {
     key: "effects",
@@ -1434,7 +1527,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "familiar",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Familiar.get, "FAMILIAR");
+      return this.custom(spec, import_kolmafia3.Familiar.get, "FAMILIAR");
     }
   }, {
     key: "familiars",
@@ -1444,7 +1537,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "item",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Item.get, "ITEM");
+      return this.custom(spec, import_kolmafia3.Item.get, "ITEM");
     }
   }, {
     key: "items",
@@ -1454,7 +1547,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "location",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Location.get, "LOCATION");
+      return this.custom(spec, import_kolmafia3.Location.get, "LOCATION");
     }
   }, {
     key: "locations",
@@ -1464,7 +1557,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "monster",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Monster.get, "MONSTER");
+      return this.custom(spec, import_kolmafia3.Monster.get, "MONSTER");
     }
   }, {
     key: "monsters",
@@ -1474,7 +1567,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "path",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Path.get, "PATH");
+      return this.custom(spec, import_kolmafia3.Path.get, "PATH");
     }
   }, {
     key: "paths",
@@ -1484,7 +1577,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "skill",
     value: function(spec) {
-      return this.custom(spec, import_kolmafia2.Skill.get, "SKILL");
+      return this.custom(spec, import_kolmafia3.Skill.get, "SKILL");
     }
   }, {
     key: "skills",
@@ -1526,7 +1619,7 @@ var Args = /* @__PURE__ */ function() {
           var _a;
           keys.push((_a = keySpec.key) !== null && _a !== void 0 ? _a : key);
         });
-        var _iterator2 = _createForOfIteratorHelper(options.positionalArgs), _step2;
+        var _iterator2 = _createForOfIteratorHelper2(options.positionalArgs), _step2;
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
             var arg = _step2.value;
@@ -1571,18 +1664,18 @@ var Args = /* @__PURE__ */ function() {
     key: "showHelp",
     value: function(args, maxOptionsToDisplay) {
       var _a, metadata = Args2.getMetadata(args);
-      (0, import_kolmafia2.printHtml)("".concat(metadata.scriptHelp)), (0, import_kolmafia2.printHtml)(""), (0, import_kolmafia2.printHtml)("<b>".concat((_a = metadata.options.defaultGroupName) !== null && _a !== void 0 ? _a : "Options", ":</b>")), metadata.traverse(function(arg, key) {
+      (0, import_kolmafia3.printHtml)("".concat(metadata.scriptHelp)), (0, import_kolmafia3.printHtml)(""), (0, import_kolmafia3.printHtml)("<b>".concat((_a = metadata.options.defaultGroupName) !== null && _a !== void 0 ? _a : "Options", ":</b>")), metadata.traverse(function(arg, key) {
         var _a2, _b, _c, _d, _e;
         if (!arg.hidden) {
           var nameText = "<font color='blue'>".concat((_a2 = arg.key) !== null && _a2 !== void 0 ? _a2 : key, "</font>"), valueText = arg.valueHelpName === "FLAG" ? "" : "<font color='purple'>".concat(arg.valueHelpName, "</font>"), helpText = (_b = arg.help) !== null && _b !== void 0 ? _b : "", defaultText = "default" in arg ? "<font color='#888888'>[default: ".concat(arg.default, "]</font>") : "", settingText = arg.setting === "" ? "" : "<font color='#888888'>[setting: ".concat((_c = arg.setting) !== null && _c !== void 0 ? _c : "".concat(metadata.scriptName, "_").concat((_d = arg.key) !== null && _d !== void 0 ? _d : key), "]</font>");
-          (0, import_kolmafia2.printHtml)("&nbsp;&nbsp;".concat([nameText, valueText, "-", helpText, defaultText, settingText].join(" ")));
+          (0, import_kolmafia3.printHtml)("&nbsp;&nbsp;".concat([nameText, valueText, "-", helpText, defaultText, settingText].join(" ")));
           var valueOptions = (_e = arg.options) !== null && _e !== void 0 ? _e : [];
           if (valueOptions.length < (maxOptionsToDisplay != null ? maxOptionsToDisplay : Number.MAX_VALUE)) {
-            var _iterator3 = _createForOfIteratorHelper(valueOptions), _step3;
+            var _iterator3 = _createForOfIteratorHelper2(valueOptions), _step3;
             try {
               for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
                 var option = _step3.value;
-                option.length === 1 ? (0, import_kolmafia2.printHtml)("&nbsp;&nbsp;&nbsp;&nbsp;<font color='blue'>".concat(nameText, "</font> ").concat(option[0])) : (0, import_kolmafia2.printHtml)("&nbsp;&nbsp;&nbsp;&nbsp;<font color='blue'>".concat(nameText, "</font> ").concat(option[0], " - ").concat(option[1]));
+                option.length === 1 ? (0, import_kolmafia3.printHtml)("&nbsp;&nbsp;&nbsp;&nbsp;<font color='blue'>".concat(nameText, "</font> ").concat(option[0])) : (0, import_kolmafia3.printHtml)("&nbsp;&nbsp;&nbsp;&nbsp;<font color='blue'>".concat(nameText, "</font> ").concat(option[0], " - ").concat(option[1]));
               }
             } catch (err) {
               _iterator3.e(err);
@@ -1592,7 +1685,7 @@ var Args = /* @__PURE__ */ function() {
           }
         }
       }, function(group) {
-        (0, import_kolmafia2.printHtml)(""), (0, import_kolmafia2.printHtml)("<b>".concat(group.name, ":</b>"));
+        (0, import_kolmafia3.printHtml)(""), (0, import_kolmafia3.printHtml)("<b>".concat(group.name, ":</b>"));
       });
     }
   }, {
@@ -1738,7 +1831,7 @@ var CommandParser = /* @__PURE__ */ function() {
   }, {
     key: "findNext",
     value: function(searchValue) {
-      var result = this.command.length, _iterator4 = _createForOfIteratorHelper(searchValue), _step4;
+      var result = this.command.length, _iterator4 = _createForOfIteratorHelper2(searchValue), _step4;
       try {
         for (_iterator4.s(); !(_step4 = _iterator4.n()).done; ) {
           var value = _step4.value, index = this.command.indexOf(value, this.index);
@@ -1771,23 +1864,31 @@ var CommandParser = /* @__PURE__ */ function() {
 }();
 
 // node_modules/grimoire-kolmafia/dist/combat.js
-var import_kolmafia3 = require("kolmafia");
-
-// node_modules/grimoire-kolmafia/dist/engine.js
-var import_kolmafia5 = require("kolmafia");
-
-// node_modules/grimoire-kolmafia/dist/outfit.js
 var import_kolmafia4 = require("kolmafia");
 
-// src/main.ts
+// node_modules/grimoire-kolmafia/dist/engine.js
 var import_kolmafia6 = require("kolmafia");
+
+// node_modules/grimoire-kolmafia/dist/outfit.js
+var import_kolmafia5 = require("kolmafia");
+
+// src/main.ts
+var import_kolmafia7 = require("kolmafia");
+var _templateObject;
+function _taggedTemplateLiteral(strings, raw) {
+  return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+}
 var config = Args.create("kolfix", "Update important KoLmafia settings", {
+  check: Args.flag({
+    help: "Update any properties that can be automatically fixed",
+    setting: ""
+  }),
   glitch: Args.number({
     help: "Set the number of times you've implemented your [glitch season reward name] \n	to calculate:\nX = today's %monster% meat reward / (5 x [glitch season reward names] owned)",
     setting: ""
   }),
   maxAll: Args.flag({
-    help: "Set all the properties to their fully upgraded values (excludes glitch reward)",
+    help: "Set all the properties to the maximum values listed below",
     setting: ""
   }),
   numberology: Args.number({
@@ -1799,7 +1900,7 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: ""
   }),
   source: Args.flag({
-    help: "Check what is installed in the Source Terminal !!!Not implemented yet!!!",
+    help: "Check what is installed in the Source Terminal",
     setting: ""
   }),
   sourceGram: Args.number({
@@ -1814,8 +1915,8 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     help: "Set the number of Source Terminal SPAM chips used (educate mp cost reduction, max 10)",
     setting: ""
   }),
-  witchess: Args.number({
-    help: "Set the strength of your Witchess puzzle champ effect (max 20)",
+  witchess: Args.flag({
+    help: "Check Witchess's puzzle champ familiar weight",
     setting: ""
   })
 });
@@ -1825,11 +1926,7 @@ function main() {
     Args.showHelp(config);
     return;
   }
-  if (config.glitch) {
-    _set("glitchItemImplementationCount", config.glitch);
-    return;
-  }
-  config.maxAll && (config.numberology = 5, config.pool = 25, config.source = !0, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10, config.witchess = 20), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.source && (0, import_kolmafia6.visitUrl)("campground.php?action=terminal"), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), config.witchess && _set("puzzleChampBonus", config.witchess);
+  config.check && (config.source = !0, config.witchess = !0), config.glitch && _set("glitchItemImplementationCount", config.glitch), config.maxAll && (config.numberology = 5, config.pool = 25, config.source = !0, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10, config.witchess = !0), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.source && (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), config.witchess && (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid));
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
