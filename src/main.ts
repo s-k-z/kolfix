@@ -12,7 +12,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game (WARNING: SLOW)",
+    help: "Check basically everything in the game that KoLmafia knows about (WARNING: SLOW)",
     setting: "",
   }),
   gingerbread: Args.number({
@@ -81,11 +81,11 @@ export default function main(command = "help"): void {
 
   if (config.fullDiagnostic) {
     print("Checking all effect descriptions");
-    for( const e of Effect.all()) {
+    for (const e of Effect.all()) {
       visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
     }
     print("Checking all skill descriptions");
-    for( const s of Skill.all()) {
+    for (const s of Skill.all()) {
       visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
     }
   }
