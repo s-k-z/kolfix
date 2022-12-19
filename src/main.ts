@@ -106,7 +106,10 @@ export default function main(command = "help"): void {
 
   if (config.glitch) set("glitchItemImplementationCount", config.glitch);
 
-  if (config.love || config.maxAll) toggle("loveTunnelAvailable");
+  if (config.love || config.maxAll) {
+    print(`${config.maxAll ? "Unlocking" : "Toggling"} Tunnel of L.O.V.E.`, color);
+    toggle("loveTunnelAvailable");
+  }
 
   if (config.max || config.maxAll) {
     print("Maximizing properties", color);
