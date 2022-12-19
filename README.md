@@ -6,29 +6,22 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 __Updated via `auto`:__
 
-&#x2611; Crafting Discoveries
-
-&#x2611; Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
-
-&#x2611; Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
-
-&#x2611; [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (Some properties can't be read if you've used all the resources today)
+ * Crafting Discoveries
+ * Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
+ * Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
+ * [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (Some properties can't be read if you've used all the resources today)
 
 __Requires Individual Setting or `maxAll`:__
 
-&#x2611; [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name)
-
-&#x2611; Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
-
-&#x2611; [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office)
-
-&#x2611; Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum). (Your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$)
-
-&#x2611; [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.)
+ * [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name)
+ * Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
+ * [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office)
+ * Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum). (Your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$)
+ * [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.)
 
 __Daily Flag Fixes:__
 
-&#x2611; [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
+ * [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
 
 ## Installation
 
