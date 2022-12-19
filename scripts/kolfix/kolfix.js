@@ -1875,24 +1875,89 @@ var import_kolmafia5 = require("kolmafia");
 // src/main.ts
 var import_kolmafia7 = require("kolmafia");
 var _templateObject;
+function _createForOfIteratorHelper3(o, allowArrayLike) {
+  var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (!it) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray3(o)) || allowArrayLike && o && typeof o.length == "number") {
+      it && (o = it);
+      var i = 0, F = function() {
+      };
+      return { s: F, n: function() {
+        return i >= o.length ? { done: !0 } : { done: !1, value: o[i++] };
+      }, e: function(_e) {
+        throw _e;
+      }, f: F };
+    }
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var normalCompletion = !0, didErr = !1, err;
+  return { s: function() {
+    it = it.call(o);
+  }, n: function() {
+    var step = it.next();
+    return normalCompletion = step.done, step;
+  }, e: function(_e2) {
+    didErr = !0, err = _e2;
+  }, f: function() {
+    try {
+      !normalCompletion && it.return != null && it.return();
+    } finally {
+      if (didErr)
+        throw err;
+    }
+  } };
+}
+function _unsupportedIterableToArray3(o, minLen) {
+  if (!!o) {
+    if (typeof o == "string")
+      return _arrayLikeToArray3(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
+      return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+      return _arrayLikeToArray3(o, minLen);
+  }
+}
+function _arrayLikeToArray3(arr, len) {
+  (len == null || len > arr.length) && (len = arr.length);
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
 function _taggedTemplateLiteral(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var config = Args.create("kolfix", "Update important KoLmafia settings", {
-  check: Args.flag({
-    help: "Update any properties that can be automatically fixed",
+  auto: Args.flag({
+    help: "Check any properties that can be automatically updated",
     setting: ""
   }),
   cleaver: Args.flag({
     help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
     setting: ""
   }),
+  fullDiagnostic: Args.flag({
+    help: "Check basically everything in the game that KoLmafia knows about (WARNING: SLOW)",
+    setting: ""
+  }),
+  gingerbread: Args.number({
+    help: "Toggle all gingerbread city upgrades",
+    setting: ""
+  }),
   glitch: Args.number({
-    help: "Set the number of times you've implemented your [glitch season reward name] \n	to calculate:\nX = today's %monster% meat reward / (5 x [glitch season reward names] owned)",
+    help: "Set the number of times you've implemented your [glitch season reward name].\nTo calculate:\nX = today's %monster% meat reward / (5 x [glitch season reward names] owned)",
+    setting: ""
+  }),
+  love: Args.flag({
+    help: "Toggle Tunnel of L.O.V.E. permanent unlock",
+    setting: ""
+  }),
+  max: Args.flag({
+    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology, pool, source terminal",
     setting: ""
   }),
   maxAll: Args.flag({
-    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded skills/iotms/quests",
+    help: "Maximize all the properties and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
     setting: ""
   }),
   numberology: Args.number({
@@ -1901,10 +1966,6 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
   }),
   pool: Args.number({
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
-    setting: ""
-  }),
-  source: Args.flag({
-    help: "Check what is installed in the Source Terminal",
     setting: ""
   }),
   sourceGram: Args.number({
@@ -1918,19 +1979,44 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
   sourceSpam: Args.number({
     help: "Set the number of Source Terminal SPAM chips used (educate mp cost reduction, max 10)",
     setting: ""
-  }),
-  witchess: Args.flag({
-    help: "Check Witchess's puzzle champ familiar weight",
-    setting: ""
   })
 });
 function main() {
-  var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "";
+  var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "help";
   if (Args.fill(config, command), config.help) {
     Args.showHelp(config);
     return;
   }
-  config.check && (config.source = !0, config.witchess = !0), config.cleaver && (_set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.glitch && _set("glitchItemImplementationCount", config.glitch), config.maxAll && (config.numberology = 5, config.pool = 25, config.source = !0, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10, config.witchess = !0), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.source && (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), config.witchess && (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid));
+  if ((config.auto || config.fullDiagnostic) && ((0, import_kolmafia7.print)("Checking properties"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid))), config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values"), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
+    (0, import_kolmafia7.print)("Checking all effect descriptions");
+    var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+        var e = _step.value;
+        (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    (0, import_kolmafia7.print)("Checking all skill descriptions");
+    var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step2;
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+        var s = _step2.value;
+        (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  }
+  var toggle = function(prop) {
+    return _set(prop, config.maxAll || !get(prop));
+  };
+  (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("Unlocking everything for Gingerbread City"), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && toggle("loveTunnelAvailable"), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties"), config.numberology = 5, config.pool = 25, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), (0, import_kolmafia7.print)("Presto fixo! All done.");
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
