@@ -8,6 +8,8 @@ __Currently supported things__:
 
 &#x2611; Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
 
+&#x2611; Crafting Discoveries
+
 &#x2611; [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office)
 
 &#x2611; [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
