@@ -8,7 +8,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   cleaver: Args.flag({
-    help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to the upper limit (until rollover or ascension)",
+    help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
     setting: "",
   }),
   glitch: Args.number({
