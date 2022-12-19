@@ -1,6 +1,6 @@
 import { Args } from "grimoire-kolmafia";
-import { Effect, handlingChoice, print, Skill, toInt, visitUrl } from "kolmafia";
-import { $effect, get, set } from "libram";
+import { Effect, handlingChoice, Item, print, Skill, toInt, visitUrl } from "kolmafia";
+import { $effect, $item, get, set } from "libram";
 
 const config = Args.create("kolfix", "Update important KoLmafia settings", {
   auto: Args.flag({
@@ -12,7 +12,7 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game that KoLmafia knows about (WARNING: SLOW)",
+    help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
     setting: "",
   }),
   gingerbread: Args.flag({
@@ -72,6 +72,7 @@ export default function main(command = "help"): void {
 
   if (config.cleaver) {
     print("Setting June Cleaver to safe values", color);
+    visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`)
     set("_juneCleaverEncounters", 10);
     set("_juneCleaverSkips", 5);
     set("_juneCleaverFightsLeft", 30);
@@ -85,6 +86,11 @@ export default function main(command = "help"): void {
     print("Checking all skill descriptions", color);
     for (const s of Skill.all()) {
       visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
+    }
+
+    print("Checking all item descriptions", color);
+    for (const i of Item.all()) {
+      visitUrl(`desc_item.php?whichitem=${i.descid}`);
     }
   }
 
