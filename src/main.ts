@@ -61,7 +61,7 @@ export default function main(command = ""): void {
     config.witchess = true;
   }
 
-  if(config.cleaver) {
+  if (config.cleaver) {
     set("_juneCleaverEncounters", 10);
     set("_juneCleaverSkips", 5);
     set("_juneCleaverFightsLeft", 30);
