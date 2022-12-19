@@ -7,12 +7,16 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     help: "Update any properties that can be automatically fixed",
     setting: "",
   }),
+  cleaver: Args.flag({
+    help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to the upper limit (until rollover or ascension)",
+    setting: "",
+  }),
   glitch: Args.number({
     help: "Set the number of times you've implemented your [glitch season reward name] \n\tto calculate:\nX = today's %monster% meat reward / (5 x [glitch season reward names] owned)",
     setting: "",
   }),
   maxAll: Args.flag({
-    help: "Set all the properties to the maximum values listed below",
+    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded skills/iotms/quests",
     setting: "",
   }),
   numberology: Args.number({
@@ -55,6 +59,12 @@ export default function main(command = ""): void {
   if (config.check) {
     config.source = true;
     config.witchess = true;
+  }
+
+  if(config.cleaver) {
+    set("_juneCleaverEncounters", 10);
+    set("_juneCleaverSkips", 5);
+    set("_juneCleaverFightsLeft", 30);
   }
 
   if (config.glitch) set("glitchItemImplementationCount", config.glitch);

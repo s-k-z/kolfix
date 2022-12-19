@@ -19,13 +19,17 @@ kolfix help
 
 __Examples__:
 
+Set the June Cleaver counters to safe values, such that other scripts can continue automating with it:
+```
+kolfix cleaver
+```
 
-To set everything to the maximum value, even things you might not own:
+Set every upgrade to the maximum value, even things you might not own:
 ```
 kolfix maxAll
 ```
 
-To set the quantity of manuals of numberology used to 3, and update puzzle champ familiar weight to the in-game value:
+Set the quantity of manuals of numberology used to 3, and update puzzle champ familiar weight to the in-game value:
 ```
 kolfix numberology=3 witchess
 ```
