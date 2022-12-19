@@ -1883,12 +1883,16 @@ var config = Args.create("kolfix", "Update important KoLmafia settings", {
     help: "Update any properties that can be automatically fixed",
     setting: ""
   }),
+  cleaver: Args.flag({
+    help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
+    setting: ""
+  }),
   glitch: Args.number({
     help: "Set the number of times you've implemented your [glitch season reward name] \n	to calculate:\nX = today's %monster% meat reward / (5 x [glitch season reward names] owned)",
     setting: ""
   }),
   maxAll: Args.flag({
-    help: "Set all the properties to the maximum values listed below",
+    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded skills/iotms/quests",
     setting: ""
   }),
   numberology: Args.number({
@@ -1926,7 +1930,7 @@ function main() {
     Args.showHelp(config);
     return;
   }
-  config.check && (config.source = !0, config.witchess = !0), config.glitch && _set("glitchItemImplementationCount", config.glitch), config.maxAll && (config.numberology = 5, config.pool = 25, config.source = !0, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10, config.witchess = !0), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.source && (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), config.witchess && (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid));
+  config.check && (config.source = !0, config.witchess = !0), config.cleaver && (_set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.glitch && _set("glitchItemImplementationCount", config.glitch), config.maxAll && (config.numberology = 5, config.pool = 25, config.source = !0, config.sourceGram = 10, config.sourcePram = 10, config.sourceSpam = 10, config.witchess = !0), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.source && (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), config.sourceGram && _set("sourceTerminalGram", config.sourceGram), config.sourcePram && _set("sourceTerminalPram", config.sourcePram), config.sourceSpam && _set("sourceTerminalSpam", config.sourceSpam), config.witchess && (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject || (_templateObject = _taggedTemplateLiteral(["Puzzle Champ"]))).descid));
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
