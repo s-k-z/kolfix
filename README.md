@@ -22,6 +22,8 @@ __Requires Individual Setting or `maxAll`:__
 __Daily Flag Fixes:__
 
  * [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
+ * [Kramco Sausage-o-Matic™](https://kol.coldfront.net/thekolwiki/index.php/Kramco_Sausage-o-Matic%E2%84%A2) (Tells KoLmafia your last sausage goblin was encountered in the impossibly far flung future)
+ * [Mime army shotglass](https://kol.coldfront.net/thekolwiki/index.php/Mime_army_shotglass)
 
 ## Installation
 

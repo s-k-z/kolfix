@@ -11,6 +11,14 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "In case KoLmafia doesn't know what your June Cleaver counters should be, set them to safe values (until rollover or ascension)",
     setting: "",
   }),
+  disableSausageGoblin: Args.flag({
+    help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+    setting: "",
+  }),
+  disableMimeShotglass: Args.flag({
+    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
+    setting: "",
+  }),
   fullDiagnostic: Args.flag({
     help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
     hidden: true,
@@ -86,6 +94,14 @@ export default function main(command = "help"): void {
       set("_juneCleaverEncounters", 10);
       set("_juneCleaverSkips", 5);
       set("_juneCleaverFightsLeft", 30);
+    }
+
+    if (config.disableSausageGoblin) {
+      set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
+    }
+
+    if (config.disableMimeShotglass) {
+      set("_mimeArmyShotglassUsed", true);
     }
 
     if (config.fullDiagnostic) {
