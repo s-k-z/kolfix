@@ -28,11 +28,11 @@ const config = Args.create("kolfix", "Update important KoLmafia settings", {
     setting: "",
   }),
   max: Args.flag({
-    help: "Set all the properties to the maximum values listed below. This option is for quickly telling KoLmafia you've fully upgraded numberology and rack 'em up pool skill",
+    help: "Set permanent pool skill and manuals of numberology to the maximum values.",
     setting: "",
   }),
   maxAll: Args.flag({
-    help: "Set all the properties to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
+    help: "Set permanent pool skill and manuals of numberology to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
     setting: "",
   }),
   numberology: Args.number({

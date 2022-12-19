@@ -44,7 +44,7 @@ Set today's June Cleaver counters to safe values, for other scripts to continue 
 kolfix cleaver
 ```
 
-Check any properties that can be automatically updated, and then set all upgrades to the maximum:
+Check any properties that can be automatically updated, set permanent pool skill and manual of numberology to the maximum, and mark gingerbread city and tunnel of love as owned and fully upgraded:
 ```
 kolfix auto maxAll
 ```
