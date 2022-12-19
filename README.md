@@ -13,10 +13,10 @@ __Updated via `auto`:__
 
 __Requires Individual Setting or `maxAll`:__
 
- * [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name)
+ * [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name) implementations
  * Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
  * [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office)
- * Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum). (Your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$)
+ * Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum) (Your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$)
  * [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.)
 
 __Daily Flag Fixes:__
