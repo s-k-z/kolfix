@@ -72,7 +72,7 @@ export default function main(command = "help"): void {
 
   if (config.cleaver) {
     print("Setting June Cleaver to safe values", color);
-    visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`)
+    visitUrl(`desc_item.php?whichitem=${$item`June cleaver`.descid}`);
     set("_juneCleaverEncounters", 10);
     set("_juneCleaverSkips", 5);
     set("_juneCleaverFightsLeft", 30);
@@ -97,7 +97,7 @@ export default function main(command = "help"): void {
   const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
 
   if (config.gingerbread || config.maxAll) {
-    print(`${config.maxAll ? "Unlocking" : "Toggling" } everything for Gingerbread City`, color);
+    print(`${config.maxAll ? "Unlocking" : "Toggling"} everything for Gingerbread City`, color);
     toggle("gingerAdvanceClockUnlocked");
     toggle("gingerExtraAdventures");
     toggle("gingerRetailUnlocked");
