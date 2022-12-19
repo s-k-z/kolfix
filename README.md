@@ -25,9 +25,9 @@ To set everything to the maximum value, even things you might not own:
 kolfix maxAll
 ```
 
-To set the quantity of manuals of numberology used to 3, and set the expected Puzzle Champ familiar weight from Witchess to 15:
+To set the quantity of manuals of numberology used to 3, and update puzzle champ familiar weight to the in-game value:
 ```
-kolfix numberology=3 witchess=15
+kolfix numberology=3 witchess
 ```
 
 To set the number of [glitch season reward name] implementations, either fight the %monster% today and record the big meat drop (same value as hp and mp restored) or search your most recent session log for this value. Calculate: 
