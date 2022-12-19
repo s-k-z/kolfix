@@ -836,9 +836,9 @@ var require_own_keys = __commonJS({
 // node_modules/core-js/internals/copy-constructor-properties.js
 var require_copy_constructor_properties = __commonJS({
   "node_modules/core-js/internals/copy-constructor-properties.js": function(exports, module2) {
-    var hasOwn = require_has_own_property(), ownKeys2 = require_own_keys(), getOwnPropertyDescriptorModule = require_object_get_own_property_descriptor(), definePropertyModule = require_object_define_property();
+    var hasOwn = require_has_own_property(), ownKeys3 = require_own_keys(), getOwnPropertyDescriptorModule = require_object_get_own_property_descriptor(), definePropertyModule = require_object_define_property();
     module2.exports = function(target, source, exceptions) {
-      for (var keys = ownKeys2(source), defineProperty = definePropertyModule.f, getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f, i = 0; i < keys.length; i++) {
+      for (var keys = ownKeys3(source), defineProperty = definePropertyModule.f, getOwnPropertyDescriptor = getOwnPropertyDescriptorModule.f, i = 0; i < keys.length; i++) {
         var key = keys[i];
         !hasOwn(target, key) && !(exceptions && hasOwn(exceptions, key)) && defineProperty(target, key, getOwnPropertyDescriptor(source, key));
       }
@@ -1151,6 +1151,90 @@ function isPhylumProperty(property) {
 }
 
 // node_modules/libram/dist/property.js
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function(key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor))
+    throw new TypeError("Cannot call a class as a function");
+}
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties(Constructor.prototype, protoProps), staticProps && _defineProperties(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+}
+function _defineProperty(obj, key, value) {
+  return key in obj ? Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value, obj;
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!!o) {
+    if (typeof o == "string")
+      return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
+      return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
+      return _arrayLikeToArray(o, minLen);
+  }
+}
+function _arrayLikeToArray(arr, len) {
+  (len == null || len > arr.length) && (len = arr.length);
+  for (var i = 0, arr2 = new Array(len); i < len; i++)
+    arr2[i] = arr[i];
+  return arr2;
+}
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol != "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i != null) {
+    var _arr = [], _n = !0, _d = !1, _s, _e;
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !(i && _arr.length === i)); _n = !0)
+        ;
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        !_n && _i.return != null && _i.return();
+      } finally {
+        if (_d)
+          throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr))
+    return arr;
+}
 var createPropertyGetter = function(transform) {
   return function(property, default_) {
     var value = (0, import_kolmafia.getProperty)(property);
@@ -1202,6 +1286,126 @@ function _set(property, value) {
   var stringValue = value === null ? "" : value.toString();
   (0, import_kolmafia.setProperty)(property, stringValue);
 }
+function setProperties(properties) {
+  for (var _i = 0, _Object$entries = Object.entries(properties); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), prop = _Object$entries$_i[0], value = _Object$entries$_i[1];
+    _set(prop, value);
+  }
+}
+var PropertiesManager = /* @__PURE__ */ function() {
+  function PropertiesManager2() {
+    _classCallCheck(this, PropertiesManager2), _defineProperty(this, "properties", {});
+  }
+  return _createClass(PropertiesManager2, [{
+    key: "storedValues",
+    get: function() {
+      return this.properties;
+    }
+  }, {
+    key: "set",
+    value: function(propertiesToSet) {
+      for (var _i2 = 0, _Object$entries2 = Object.entries(propertiesToSet); _i2 < _Object$entries2.length; _i2++) {
+        var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i2], 2), propertyName = _Object$entries2$_i[0], propertyValue = _Object$entries2$_i[1];
+        this.properties[propertyName] === void 0 && (this.properties[propertyName] = get(propertyName)), _set(propertyName, propertyValue);
+      }
+    }
+  }, {
+    key: "setChoices",
+    value: function(choicesToSet) {
+      this.set(Object.fromEntries(Object.entries(choicesToSet).map(function(_ref5) {
+        var _ref6 = _slicedToArray(_ref5, 2), choiceNumber = _ref6[0], choiceValue = _ref6[1];
+        return ["choiceAdventure".concat(choiceNumber), choiceValue];
+      })));
+    }
+  }, {
+    key: "setChoice",
+    value: function(choiceToSet, value) {
+      this.setChoices(_defineProperty({}, choiceToSet, value));
+    }
+  }, {
+    key: "reset",
+    value: function() {
+      for (var _len = arguments.length, properties = new Array(_len), _key = 0; _key < _len; _key++)
+        properties[_key] = arguments[_key];
+      for (var _i3 = 0, _properties = properties; _i3 < _properties.length; _i3++) {
+        var property = _properties[_i3], value = this.properties[property];
+        value && _set(property, value);
+      }
+    }
+  }, {
+    key: "resetAll",
+    value: function() {
+      setProperties(this.properties);
+    }
+  }, {
+    key: "clear",
+    value: function() {
+      for (var _len2 = arguments.length, properties = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)
+        properties[_key2] = arguments[_key2];
+      for (var _i4 = 0, _properties2 = properties; _i4 < _properties2.length; _i4++) {
+        var property = _properties2[_i4];
+        this.properties[property] && delete this.properties[property];
+      }
+    }
+  }, {
+    key: "clearAll",
+    value: function() {
+      this.properties = {};
+    }
+  }, {
+    key: "setMinimumValue",
+    value: function(property, value) {
+      return get(property, 0) < value ? (this.set(_defineProperty({}, property, value)), !0) : !1;
+    }
+  }, {
+    key: "setMaximumValue",
+    value: function(property, value) {
+      return get(property, 0) > value ? (this.set(_defineProperty({}, property, value)), !0) : !1;
+    }
+  }, {
+    key: "clone",
+    value: function() {
+      var newGuy = new PropertiesManager2();
+      return newGuy.properties = this.storedValues, newGuy;
+    }
+  }, {
+    key: "clamp",
+    value: function(property, min, max) {
+      if (max < min)
+        return !1;
+      var start = get(property);
+      return this.setMinimumValue(property, min), this.setMaximumValue(property, max), start !== get(property);
+    }
+  }, {
+    key: "equals",
+    value: function(other) {
+      var thisProps = Object.entries(this.storedValues), otherProps = new Map(Object.entries(other.storedValues));
+      if (thisProps.length !== otherProps.size)
+        return !1;
+      for (var _i5 = 0, _thisProps = thisProps; _i5 < _thisProps.length; _i5++) {
+        var _thisProps$_i = _slicedToArray(_thisProps[_i5], 2), propertyName = _thisProps$_i[0], propertyValue = _thisProps$_i[1];
+        if (otherProps.get(propertyName) === propertyValue)
+          return !1;
+      }
+      return !0;
+    }
+  }, {
+    key: "merge",
+    value: function(other) {
+      var newGuy = new PropertiesManager2();
+      return newGuy.properties = _objectSpread(_objectSpread({}, this.properties), other.properties), newGuy;
+    }
+  }], [{
+    key: "merge",
+    value: function() {
+      for (var _len3 = arguments.length, mergees = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++)
+        mergees[_key3] = arguments[_key3];
+      return mergees.length === 0 ? new PropertiesManager2() : mergees.reduce(function(a, b) {
+        return a.merge(b);
+      });
+    }
+  }]), PropertiesManager2;
+}();
 
 // node_modules/libram/dist/template-string.js
 var import_kolmafia2 = require("kolmafia");
@@ -1210,7 +1414,7 @@ var import_kolmafia2 = require("kolmafia");
 function _createForOfIteratorHelper(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length == "number") {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray2(o)) || allowArrayLike && o && typeof o.length == "number") {
       it && (o = it);
       var i = 0, F = function() {
       };
@@ -1239,18 +1443,18 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
     }
   } };
 }
-function _unsupportedIterableToArray(o, minLen) {
+function _unsupportedIterableToArray2(o, minLen) {
   if (!!o) {
     if (typeof o == "string")
-      return _arrayLikeToArray(o, minLen);
+      return _arrayLikeToArray2(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
       return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-      return _arrayLikeToArray(o, minLen);
+      return _arrayLikeToArray2(o, minLen);
   }
 }
-function _arrayLikeToArray(arr, len) {
+function _arrayLikeToArray2(arr, len) {
   (len == null || len > arr.length) && (len = arr.length);
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
@@ -1300,7 +1504,7 @@ var concatTemplateString = function(literals) {
 function _createForOfIteratorHelper2(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray2(o)) || allowArrayLike && o && typeof o.length == "number") {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray3(o)) || allowArrayLike && o && typeof o.length == "number") {
       it && (o = it);
       var i = 0, F = function() {
       };
@@ -1329,24 +1533,24 @@ function _createForOfIteratorHelper2(o, allowArrayLike) {
     }
   } };
 }
-function _unsupportedIterableToArray2(o, minLen) {
+function _unsupportedIterableToArray3(o, minLen) {
   if (!!o) {
     if (typeof o == "string")
-      return _arrayLikeToArray2(o, minLen);
+      return _arrayLikeToArray3(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
       return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-      return _arrayLikeToArray2(o, minLen);
+      return _arrayLikeToArray3(o, minLen);
   }
 }
-function _arrayLikeToArray2(arr, len) {
+function _arrayLikeToArray3(arr, len) {
   (len == null || len > arr.length) && (len = arr.length);
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
   return arr2;
 }
-function ownKeys(object, enumerableOnly) {
+function ownKeys2(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -1356,38 +1560,38 @@ function ownKeys(object, enumerableOnly) {
   }
   return keys;
 }
-function _objectSpread(target) {
+function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function(key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+    i % 2 ? ownKeys2(Object(source), !0).forEach(function(key) {
+      _defineProperty2(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys2(Object(source)).forEach(function(key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
   return target;
 }
-function _defineProperty(obj, key, value) {
+function _defineProperty2(obj, key, value) {
   return key in obj ? Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }) : obj[key] = value, obj;
 }
-function _classCallCheck(instance, Constructor) {
+function _classCallCheck2(instance, Constructor) {
   if (!(instance instanceof Constructor))
     throw new TypeError("Cannot call a class as a function");
 }
-function _defineProperties(target, props) {
+function _defineProperties2(target, props) {
   for (var i = 0; i < props.length; i++) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || !1, descriptor.configurable = !0, "value" in descriptor && (descriptor.writable = !0), Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
-function _createClass(Constructor, protoProps, staticProps) {
-  return protoProps && _defineProperties(Constructor.prototype, protoProps), staticProps && _defineProperties(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
+function _createClass2(Constructor, protoProps, staticProps) {
+  return protoProps && _defineProperties2(Constructor.prototype, protoProps), staticProps && _defineProperties2(Constructor, staticProps), Object.defineProperty(Constructor, "prototype", { writable: !1 }), Constructor;
 }
 var Args = /* @__PURE__ */ function() {
   function Args2() {
-    _classCallCheck(this, Args2);
+    _classCallCheck2(this, Args2);
   }
-  return _createClass(Args2, null, [{
+  return _createClass2(Args2, null, [{
     key: "custom",
     value: function(spec, _parser, valueHelpName) {
       var _a, _b, raw_options = (_a = spec.options) === null || _a === void 0 ? void 0 : _a.map(function(option) {
@@ -1395,7 +1599,7 @@ var Args = /* @__PURE__ */ function() {
       });
       if ("default" in spec && raw_options && !raw_options.includes(spec.default))
         throw "Invalid default value ".concat(spec.default);
-      return _objectSpread(_objectSpread({}, spec), {}, {
+      return _objectSpread2(_objectSpread2({}, spec), {}, {
         valueHelpName: valueHelpName,
         parser: function(value) {
           var parsed_value = _parser(value);
@@ -1409,7 +1613,7 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "arrayFromArg",
     value: function(spec, argFromSpec) {
-      var _a, _b, _c, spec_without_default = _objectSpread({}, spec);
+      var _a, _b, _c, spec_without_default = _objectSpread2({}, spec);
       "default" in spec_without_default && delete spec_without_default.default;
       var arg = argFromSpec.call(this, spec_without_default), raw_options = (_a = spec.options) === null || _a === void 0 ? void 0 : _a.map(function(option) {
         return option[0];
@@ -1443,7 +1647,7 @@ var Args = /* @__PURE__ */ function() {
         var failure_index = result.indexOf(void 0);
         return failure_index !== -1 ? new ParseError("components expected ".concat(arg.parser.name, "$ but could not parse ").concat(values[failure_index])) : result;
       };
-      return _objectSpread(_objectSpread({}, spec), {}, {
+      return _objectSpread2(_objectSpread2({}, spec), {}, {
         valueHelpName: "".concat(arg.valueHelpName).concat(separator, " ").concat(arg.valueHelpName).concat(separator, " ..."),
         parser: arrayParser,
         options: (_c = spec.options) === null || _c === void 0 ? void 0 : _c.map(function(a) {
@@ -1595,17 +1799,17 @@ var Args = /* @__PURE__ */ function() {
   }, {
     key: "create",
     value: function(scriptName, scriptHelp, args, options) {
-      var _objectSpread2;
+      var _objectSpread22;
       _traverse(args, function(keySpec, key) {
         if (key === "help" || keySpec.key === "help")
           throw "help is a reserved argument name";
       });
-      var argsWithHelp = _objectSpread(_objectSpread({}, args), {}, {
+      var argsWithHelp = _objectSpread2(_objectSpread2({}, args), {}, {
         help: this.flag({
           help: "Show this message and exit.",
           setting: ""
         })
-      }), res = _objectSpread(_objectSpread({}, _loadDefaultValues(argsWithHelp)), {}, (_objectSpread2 = {}, _defineProperty(_objectSpread2, specSymbol, argsWithHelp), _defineProperty(_objectSpread2, scriptSymbol, scriptName), _defineProperty(_objectSpread2, scriptHelpSymbol, scriptHelp), _defineProperty(_objectSpread2, optionsSymbol, options != null ? options : {}), _objectSpread2)), metadata = Args2.getMetadata(res);
+      }), res = _objectSpread2(_objectSpread2({}, _loadDefaultValues(argsWithHelp)), {}, (_objectSpread22 = {}, _defineProperty2(_objectSpread22, specSymbol, argsWithHelp), _defineProperty2(_objectSpread22, scriptSymbol, scriptName), _defineProperty2(_objectSpread22, scriptHelpSymbol, scriptHelp), _defineProperty2(_objectSpread22, optionsSymbol, options != null ? options : {}), _objectSpread22)), metadata = Args2.getMetadata(res);
       if (metadata.traverseAndMaybeSet(res, function(keySpec, key) {
         var _a, _b, setting = (_a = keySpec.setting) !== null && _a !== void 0 ? _a : "".concat(scriptName, "_").concat((_b = keySpec.key) !== null && _b !== void 0 ? _b : key);
         if (setting !== "") {
@@ -1694,8 +1898,8 @@ var Args = /* @__PURE__ */ function() {
       return new WrappedArgMetadata(args);
     }
   }]), Args2;
-}(), ParseError = /* @__PURE__ */ _createClass(function ParseError2(message) {
-  _classCallCheck(this, ParseError2), this.message = message;
+}(), ParseError = /* @__PURE__ */ _createClass2(function ParseError2(message) {
+  _classCallCheck2(this, ParseError2), this.message = message;
 }), specSymbol = Symbol("spec"), scriptSymbol = Symbol("script"), scriptHelpSymbol = Symbol("scriptHelp"), optionsSymbol = Symbol("options");
 function parseAndValidate(arg, source, value) {
   var parsed_value;
@@ -1712,9 +1916,9 @@ function parseAndValidate(arg, source, value) {
 }
 var WrappedArgMetadata = /* @__PURE__ */ function() {
   function WrappedArgMetadata2(args) {
-    _classCallCheck(this, WrappedArgMetadata2), this.spec = args[specSymbol], this.scriptName = args[scriptSymbol], this.scriptHelp = args[scriptHelpSymbol], this.options = args[optionsSymbol];
+    _classCallCheck2(this, WrappedArgMetadata2), this.spec = args[specSymbol], this.scriptName = args[scriptSymbol], this.scriptHelp = args[scriptHelpSymbol], this.options = args[optionsSymbol];
   }
-  return _createClass(WrappedArgMetadata2, [{
+  return _createClass2(WrappedArgMetadata2, [{
     key: "loadDefaultValues",
     value: function() {
       return _loadDefaultValues(this.spec);
@@ -1770,9 +1974,9 @@ function _traverse(spec, process, onGroup) {
 }
 var CommandParser = /* @__PURE__ */ function() {
   function CommandParser2(command, keys, flags, positionalArgs) {
-    _classCallCheck(this, CommandParser2), this.command = command, this.index = 0, this.keys = keys, this.flags = flags, this.positionalArgs = positionalArgs, this.positionalArgsParsed = 0;
+    _classCallCheck2(this, CommandParser2), this.command = command, this.index = 0, this.keys = keys, this.flags = flags, this.positionalArgs = positionalArgs, this.positionalArgsParsed = 0;
   }
-  return _createClass(CommandParser2, [{
+  return _createClass2(CommandParser2, [{
     key: "parse",
     value: function() {
       var _a, _b, _c, _d;
@@ -1878,7 +2082,7 @@ var _templateObject, _templateObject2, _templateObject3;
 function _createForOfIteratorHelper3(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray3(o)) || allowArrayLike && o && typeof o.length == "number") {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray4(o)) || allowArrayLike && o && typeof o.length == "number") {
       it && (o = it);
       var i = 0, F = function() {
       };
@@ -1907,18 +2111,18 @@ function _createForOfIteratorHelper3(o, allowArrayLike) {
     }
   } };
 }
-function _unsupportedIterableToArray3(o, minLen) {
+function _unsupportedIterableToArray4(o, minLen) {
   if (!!o) {
     if (typeof o == "string")
-      return _arrayLikeToArray3(o, minLen);
+      return _arrayLikeToArray4(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor && (n = o.constructor.name), n === "Map" || n === "Set")
       return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))
-      return _arrayLikeToArray3(o, minLen);
+      return _arrayLikeToArray4(o, minLen);
   }
 }
-function _arrayLikeToArray3(arr, len) {
+function _arrayLikeToArray4(arr, len) {
   (len == null || len > arr.length) && (len = arr.length);
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
@@ -1971,68 +2175,75 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
   })
 });
 function main() {
-  var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "help";
+  var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "help", color = "green";
   if (Args.fill(config, command), config.help) {
     Args.showHelp(config);
     return;
   }
-  var color = "green";
-  if (config.auto || config.fullDiagnostic) {
-    if ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid)), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)()) {
-      for (var _i = 0, _arr = ["status", "enhance", "enquiry", "educate", "extrude"]; _i < _arr.length; _i++) {
-        var text = _arr[_i];
-        (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=".concat(text));
+  var propertyManager = new PropertiesManager();
+  propertyManager.set({
+    logPreferenceChange: !0
+  });
+  try {
+    if (config.auto || config.fullDiagnostic) {
+      if ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid)), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)()) {
+        for (var _i = 0, _arr = ["status", "enhance", "enquiry", "educate", "extrude"]; _i < _arr.length; _i++) {
+          var text = _arr[_i];
+          (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=".concat(text));
+        }
+        (0, import_kolmafia7.visitUrl)("main.php");
       }
-      (0, import_kolmafia7.visitUrl)("main.php");
+      (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["Puzzle Champ"]))).descid)), (0, import_kolmafia7.print)("Checking recipes", color);
+      for (var _i2 = 0, _arr2 = ["cocktail", "combine", "cook", "multi", "smith"]; _i2 < _arr2.length; _i2++) {
+        var craft = _arr2[_i2];
+        (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
+      }
     }
-    (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat($effect(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["Puzzle Champ"]))).descid)), (0, import_kolmafia7.print)("Checking recipes", color);
-    for (var _i2 = 0, _arr2 = ["cocktail", "combine", "cook", "multi", "smith"]; _i2 < _arr2.length; _i2++) {
-      var craft = _arr2[_i2];
-      (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
+    if (config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
+      (0, import_kolmafia7.print)("Checking all effect descriptions", color);
+      var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+          var e = _step.value;
+          (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      (0, import_kolmafia7.print)("Checking all skill descriptions", color);
+      var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+          var s = _step2.value;
+          (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      (0, import_kolmafia7.print)("Checking all item descriptions", color);
+      var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
+          var i = _step3.value;
+          (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
     }
+    var toggle = function(prop) {
+      return _set(prop, config.maxAll || !get(prop));
+    };
+    (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties", color), config.numberology = 5, config.pool = 25), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
+  } finally {
+    propertyManager.resetAll();
   }
-  if (config.cleaver && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), config.fullDiagnostic) {
-    (0, import_kolmafia7.print)("Checking all effect descriptions", color);
-    var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done; ) {
-        var e = _step.value;
-        (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-    (0, import_kolmafia7.print)("Checking all skill descriptions", color);
-    var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step2;
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-        var s = _step2.value;
-        (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
-    }
-    (0, import_kolmafia7.print)("Checking all item descriptions", color);
-    var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step3;
-    try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
-        var i = _step3.value;
-        (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
-    }
-  }
-  var toggle = function(prop) {
-    return _set(prop, config.maxAll || !get(prop));
-  };
-  (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties", color), config.numberology = 5, config.pool = 25), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
