@@ -1,6 +1,14 @@
 # kolfix
 
-Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolmafia/kolmafia/) preferences.
+Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolmafia/kolmafia/) preferences. Useful for users who have had their preferences recently lost.
+
+## Installation
+
+To install, copy and paste the following into the KoLmafia Graphical CLI aka GCLI:
+
+```
+git checkout https://github.com/s-k-z/kolfix.git release
+```
 
 ## Usage
 
@@ -12,7 +20,7 @@ kolfix help
 __Examples__:
 
 
-To set everything to the maximum value:
+To set everything to the maximum value, even things you might not own:
 ```
 kolfix maxAll
 ```
