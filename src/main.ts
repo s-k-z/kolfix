@@ -58,6 +58,9 @@ export default function main(command = "help"): void {
     print("Checking properties", color);
     visitUrl("place.php?whichplace=town_wrong");
     visitUrl("place.php?whichplace=town_right");
+
+    visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
+
     visitUrl("campground.php?action=terminal");
     if (handlingChoice()) {
       for (const text of ["status", "enhance", "enquiry", "educate", "extrude"]) {
@@ -94,11 +97,6 @@ export default function main(command = "help"): void {
     print("Checking all item descriptions", color);
     for (const i of Item.all()) {
       visitUrl(`desc_item.php?whichitem=${i.descid}`);
-    }
-
-    print("Checking recipes", color);
-    for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
-      visitUrl(`craft.php?mode=discoveries&what=${craft}`);
     }
   }
 
