@@ -177,8 +177,8 @@ export default function main(command = "help"): void {
 
     if (config.max || config.maxAll) {
       print("Maximizing properties", color);
-      config.numberology = 5;
-      config.pool = 25;
+      config.numberology = config.numberology ?? 5;
+      config.pool = config.pool ?? 25;
     }
 
     if (config.numberology) set("skillLevel144", config.numberology);
