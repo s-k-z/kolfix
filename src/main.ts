@@ -33,7 +33,7 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   gingerbread: Args.flag({
-    help: "Toggle all gingerbread city upgrades",
+    help: "Toggle gingerbread city permanent unlock and all upgrades",
     setting: "",
   }),
   glitch: Args.number({
@@ -150,6 +150,7 @@ export default function main(command = "help"): void {
 
     if (config.gingerbread || config.maxAll) {
       print(`${config.maxAll ? "Unlocking" : "Toggling"} everything for Gingerbread City`, color);
+      toggle("gingerbreadCityAvailable");
       toggle("gingerAdvanceClockUnlocked");
       toggle("gingerExtraAdventures");
       toggle("gingerRetailUnlocked");

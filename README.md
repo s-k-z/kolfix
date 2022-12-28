@@ -17,13 +17,13 @@ __Requires Individual Setting or `maxAll`:__
 
  * [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name) implementations
  * Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
- * [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office)
+ * [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) full unlock
  * Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum) (Your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$)
- * [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.)
+ * [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.) permanent unlock
 
 __Daily Flag Fixes:__
 
- * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) can also be forcefully set to fill in zeroes for monsters reminisced today
+ * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) can be forcefully set to fill in zeroes for monsters reminisced today (KoLmafia can't tell how many you've used today if less than all 3)
  * [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
  * [Kramco Sausage-o-Matic™](https://kol.coldfront.net/thekolwiki/index.php/Kramco_Sausage-o-Matic%E2%84%A2) (Tells KoLmafia your last sausage goblin was encountered in the impossibly far flung future)
  * [Mime army shotglass](https://kol.coldfront.net/thekolwiki/index.php/Mime_army_shotglass)
