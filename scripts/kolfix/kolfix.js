@@ -2141,7 +2141,11 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     setting: ""
   }),
   disableAll: Args.flag({
-    help: "Sets other daily flags to their disabled state, and sets cleaver to safe values",
+    help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
+    setting: ""
+  }),
+  disableLegendaryPizzas: Args.flag({
+    help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: ""
   }),
   disableLocket: Args.flag({
@@ -2221,7 +2225,7 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
+    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
       (0, import_kolmafia7.print)("Checking all effect descriptions", color);
       var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
       try {
