@@ -2162,7 +2162,7 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     setting: ""
   }),
   gingerbread: Args.flag({
-    help: "Toggle all gingerbread city upgrades",
+    help: "Toggle gingerbread city permanent unlock and all upgrades",
     setting: ""
   }),
   glitch: Args.number({
@@ -2262,7 +2262,7 @@ function main() {
     var toggle = function(prop) {
       return _set(prop, config.maxAll || !get(prop));
     };
-    (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties", color), config.numberology = 5, config.pool = 25), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
+    (config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerbreadCityAvailable"), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), (config.max || config.maxAll) && ((0, import_kolmafia7.print)("Maximizing properties", color), config.numberology = 5, config.pool = 25), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
   } finally {
     propertyManager.resetAll();
   }
