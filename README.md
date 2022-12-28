@@ -6,7 +6,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 __Updated via `auto` (these properties can be automatically inferred from the game):__
 
- * Crafting Discoveries/Recipes Learned
+ * Crafting Discoveries/Recipes Learned (notably [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) recipes)
  * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) - only if used up completely today (adds zeroes to the property if necessary)
  * Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
  * Quests including any [Protonic ghost](https://kol.coldfront.net/thekolwiki/index.php/Protonic_accelerator_pack) location
@@ -21,12 +21,16 @@ __Requires Individual Setting or `maxAll` (if a maximum exists):__
  * Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum) - your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$
  * [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.) permanent unlock
 
-__Daily Flag Fixes:__
+__Daily Flag Fixes (persist until rollover or ascension):__
 
  * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) can be forcefully set to fill in zeroes for monsters reminisced today (KoLmafia can't tell how many you've used today if less than all three)
  * [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
  * [Kramco Sausage-o-Matic™](https://kol.coldfront.net/thekolwiki/index.php/Kramco_Sausage-o-Matic%E2%84%A2) - tells KoLmafia your last sausage goblin was encountered in the impossibly far flung future
  * [Mime army shotglass](https://kol.coldfront.net/thekolwiki/index.php/Mime_army_shotglass)
+
+__LIfetime Flag Fixes (persist until ascension):__
+
+* Legendary [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) pizzas eaten
 
 ## Installation
 

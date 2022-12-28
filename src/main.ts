@@ -12,7 +12,11 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   disableAll: Args.flag({
-    help: "Sets other daily flags to their disabled state, and sets cleaver to safe values",
+    help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
+    setting: "",
+  }),
+  disableLegendaryPizzas: Args.flag({
+    help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: "",
   }),
   disableLocket: Args.flag({
@@ -115,6 +119,13 @@ export default function main(command = "help"): void {
       set("_juneCleaverEncounters", 10);
       set("_juneCleaverSkips", 5);
       set("_juneCleaverFightsLeft", 30);
+    }
+
+    if (config.disableLegendaryPizzas || config.disableAll) {
+      print("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color);
+      set("calzoneOfLegendEaten", true);
+      set("deepDishOfLegendEaten", true);
+      set("pizzaOfLegendEaten", true);
     }
 
     if (config.disableLocket || config.disableAll) {
