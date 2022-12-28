@@ -7,7 +7,9 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 __Updated via `auto`:__
 
  * Crafting Discoveries/Recipes Learned
+ * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) only if used up completely today
  * Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
+ * Quests including any [Protonic ghost](https://kol.coldfront.net/thekolwiki/index.php/Protonic_accelerator_pack) location
  * [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) (Some properties can't be read if you've used all the resources today)
  * Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
 
@@ -21,6 +23,7 @@ __Requires Individual Setting or `maxAll`:__
 
 __Daily Flag Fixes:__
 
+ * [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) can also be forcefully set to fill in zeroes for monsters reminisced today
  * [June Cleaver](https://kol.coldfront.net/thekolwiki/index.php/June_cleaver)
  * [Kramco Sausage-o-Matic™](https://kol.coldfront.net/thekolwiki/index.php/Kramco_Sausage-o-Matic%E2%84%A2) (Tells KoLmafia your last sausage goblin was encountered in the impossibly far flung future)
  * [Mime army shotglass](https://kol.coldfront.net/thekolwiki/index.php/Mime_army_shotglass)

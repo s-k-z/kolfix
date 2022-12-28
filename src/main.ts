@@ -15,12 +15,16 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Sets other daily flags to their disabled state, and sets cleaver to safe values",
     setting: "",
   }),
-  disableShotglass: Args.flag({
-    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
+  disableLocket: Args.flag({
+    help: 'Set the _locketMonstersFought property to "0,0,0" (until rollover or ascension)',
     setting: "",
   }),
   disableSausageGoblin: Args.flag({
     help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+    setting: "",
+  }),
+  disableShotglass: Args.flag({
+    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
     setting: "",
   }),
   fullDiagnostic: Args.flag({
@@ -73,10 +77,21 @@ export default function main(command = "help"): void {
   try {
     if (config.auto || config.fullDiagnostic) {
       print("Checking properties", color);
+
+      visitUrl("questlog.php?which=1");
+      visitUrl("questlog.php?which=2");
+
       visitUrl("place.php?whichplace=town_wrong");
       visitUrl("place.php?whichplace=town_right");
 
       visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
+
+      const locketResponse = visitUrl("inventory.php?reminisce=1", false);
+      if (locketResponse.includes("You don't want to reminisce any more today.")) {
+        const oldLocket = get("_locketMonstersFought").split(",");
+        const newLocket = oldLocket.concat(new Array(3).fill(0)).slice(0, 3);
+        set("_locketMonstersFought", newLocket);
+      }
 
       visitUrl("campground.php?action=terminal");
       if (handlingChoice()) {
@@ -85,7 +100,9 @@ export default function main(command = "help"): void {
         }
         visitUrl("main.php");
       }
+
       visitUrl(`desc_effect.php?whicheffect=${$effect`Puzzle Champ`.descid}`);
+
       print("Checking recipes", color);
       for (const craft of ["cocktail", "combine", "cook", "multi", "smith"]) {
         visitUrl(`craft.php?mode=discoveries&what=${craft}`);
@@ -98,6 +115,10 @@ export default function main(command = "help"): void {
       set("_juneCleaverEncounters", 10);
       set("_juneCleaverSkips", 5);
       set("_juneCleaverFightsLeft", 30);
+    }
+
+    if (config.disableLocket || config.disableAll) {
+      set("_locketMonstersFought", "0,0,0");
     }
 
     if (config.disableShotglass || config.disableAll) {
