@@ -2144,12 +2144,16 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Sets other daily flags to their disabled state, and sets cleaver to safe values",
     setting: ""
   }),
-  disableShotglass: Args.flag({
-    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
+  disableLocket: Args.flag({
+    help: 'Set the _locketMonstersFought property to "0,0,0" (until rollover or ascension)',
     setting: ""
   }),
   disableSausageGoblin: Args.flag({
     help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+    setting: ""
+  }),
+  disableShotglass: Args.flag({
+    help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
     setting: ""
   }),
   fullDiagnostic: Args.flag({
@@ -2198,7 +2202,13 @@ function main() {
   });
   try {
     if (config.auto || config.fullDiagnostic) {
-      if ((0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid)), (0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)()) {
+      (0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("questlog.php?which=1"), (0, import_kolmafia7.visitUrl)("questlog.php?which=2"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid));
+      var locketResponse = (0, import_kolmafia7.visitUrl)("inventory.php?reminisce=1", !1);
+      if (locketResponse.includes("You don't want to reminisce any more today.")) {
+        var oldLocket = get("_locketMonstersFought").split(","), newLocket = oldLocket.concat(new Array(3).fill(0)).slice(0, 3);
+        _set("_locketMonstersFought", newLocket);
+      }
+      if ((0, import_kolmafia7.visitUrl)("campground.php?action=terminal"), (0, import_kolmafia7.handlingChoice)()) {
         for (var _i = 0, _arr = ["status", "enhance", "enquiry", "educate", "extrude"]; _i < _arr.length; _i++) {
           var text = _arr[_i];
           (0, import_kolmafia7.visitUrl)("choice.php?pwd&whichchoice=1191&option=1&input=".concat(text));
@@ -2211,7 +2221,7 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
+    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
       (0, import_kolmafia7.print)("Checking all effect descriptions", color);
       var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
       try {
