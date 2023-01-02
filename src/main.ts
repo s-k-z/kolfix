@@ -48,6 +48,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Toggle Tunnel of L.O.V.E. permanent unlock",
     setting: "",
   }),
+  mall: Args.number({
+    help: "Set the autoBuyPriceLimit (no max, but not recommended above 250k)",
+    setting: "",
+  }),
   max: Args.flag({
     help: "Set permanent pool skill and manuals of numberology to the maximum values.",
     setting: "",
@@ -176,13 +180,19 @@ export default function main(command = "help"): void {
     }
 
     if (config.max || config.maxAll) {
-      print("Maximizing properties", color);
       config.numberology = config.numberology ?? 5;
       config.pool = config.pool ?? 25;
     }
 
     if (config.numberology) set("skillLevel144", config.numberology);
     if (config.pool) set("poolSharkCount", config.pool);
+
+    if (config.mall) {
+      if (config.mall > 250000) {
+        print(`Warning: autoBuyPriceLimit ${config.mall} is not recommended`, "red");
+      }
+      set("autoBuyPriceLimit", config.mall);
+    }
 
     print("Presto fixo! All done.", color);
   } finally {
