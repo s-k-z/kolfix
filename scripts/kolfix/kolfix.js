@@ -2196,6 +2196,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
   pool: Args.number({
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: ""
+  }),
+  voa: Args.number({
+    help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
+    setting: ""
   })
 });
 function main() {
@@ -2274,7 +2278,11 @@ function main() {
       var _config$numberology, _config$pool;
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
-    config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.mall && (config.mall > 25e4 && (0, import_kolmafia7.print)("Warning: autoBuyPriceLimit ".concat(config.mall, " is not recommended"), "red"), _set("autoBuyPriceLimit", config.mall)), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
+    config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool);
+    var warn = function(key, value) {
+      (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value, " is not recommended, red"));
+    };
+    config.mall && (config.mall > 25e4 && warn("autoBuyPriceLimit", config.mall), _set("autoBuyPriceLimit", config.mall)), config.voa && (config.voa > 1e4 && warn("valueOfAdventure", config.voa), _set("valueOfAdventure", config.voa)), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
   } finally {
     propertyManager.resetAll();
   }
