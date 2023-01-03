@@ -68,6 +68,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: "",
   }),
+  voa: Args.number({
+    help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
+    setting: "",
+  }),
 });
 
 export default function main(command = "help"): void {
@@ -187,11 +191,18 @@ export default function main(command = "help"): void {
     if (config.numberology) set("skillLevel144", config.numberology);
     if (config.pool) set("poolSharkCount", config.pool);
 
+    const warn = (key: string, value: number) => {
+      print(`Warning: ${key} ${value} is not recommended, red`);
+    };
+
     if (config.mall) {
-      if (config.mall > 250000) {
-        print(`Warning: autoBuyPriceLimit ${config.mall} is not recommended`, "red");
-      }
+      if (config.mall > 250000) warn("autoBuyPriceLimit", config.mall);
       set("autoBuyPriceLimit", config.mall);
+    }
+
+    if (config.voa) {
+      if (config.voa > 10000) warn("valueOfAdventure", config.voa);
+      set("valueOfAdventure", config.voa);
     }
 
     print("Presto fixo! All done.", color);
