@@ -74,6 +74,43 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
 });
 
+const places = [
+  "bathole",
+  "beanstalk",
+  "canadia",
+  "da.php",
+  "desertbeach",
+  "gingerbreadcity",
+  "hiddencity",
+  "highlands",
+  "main.php",
+  "manor1",
+  "manor2",
+  "manor3",
+  "manor4",
+  "marais",
+  "mclargehuge?action=cloudypeak",
+  "mclargehuge?action=trappercabin",
+  "monorail",
+  "mountains.php",
+  "orc_chasm",
+  "plains",
+  "pyramid",
+  "questlog.php?which=1",
+  "questlog.php?which=2",
+  "realm_fantasy",
+  "realm_pirate",
+  "sea_oldman",
+  "spacegate",
+  "speakeasy",
+  "tavern",
+  "town_right",
+  "town_wrong",
+  "town",
+  "woods",
+  "zeppelin",
+] as const;
+
 export default function main(command = "help"): void {
   const color = "green";
 
@@ -90,11 +127,10 @@ export default function main(command = "help"): void {
     if (config.auto || config.fullDiagnostic) {
       print("Checking properties", color);
 
-      visitUrl("questlog.php?which=1");
-      visitUrl("questlog.php?which=2");
-
-      visitUrl("place.php?whichplace=town_wrong");
-      visitUrl("place.php?whichplace=town_right");
+      print("Touring the Kingdom", color);
+      for (const place of places) {
+        visitUrl(place.includes(".php") ? place : `place.php?whichplace=${place}`);
+      }
 
       visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
 
