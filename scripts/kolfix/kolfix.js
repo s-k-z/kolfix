@@ -2079,6 +2079,9 @@ var import_kolmafia5 = require("kolmafia");
 // src/main.ts
 var import_kolmafia7 = require("kolmafia");
 var _templateObject, _templateObject2, _templateObject3;
+function _taggedTemplateLiteral(strings, raw) {
+  return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
+}
 function _createForOfIteratorHelper3(o, allowArrayLike) {
   var it = typeof Symbol != "undefined" && o[Symbol.iterator] || o["@@iterator"];
   if (!it) {
@@ -2127,9 +2130,6 @@ function _arrayLikeToArray4(arr, len) {
   for (var i = 0, arr2 = new Array(len); i < len; i++)
     arr2[i] = arr[i];
   return arr2;
-}
-function _taggedTemplateLiteral(strings, raw) {
-  return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
 var config = Args.create("kolfix", "For updating important KoLmafia settings", {
   auto: Args.flag({
@@ -2201,7 +2201,7 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
     setting: ""
   })
-});
+}), places = ["bathole", "beanstalk", "canadia", "da.php", "desertbeach", "gingerbreadcity", "hiddencity", "highlands", "main.php", "manor1", "manor2", "manor3", "manor4", "marais", "mclargehuge?action=cloudypeak", "mclargehuge?action=trappercabin", "monorail", "mountains.php", "orc_chasm", "plains", "pyramid", "questlog.php?which=1", "questlog.php?which=2", "realm_fantasy", "realm_pirate", "sea_oldman", "spacegate", "speakeasy", "tavern", "town_right", "town_wrong", "town", "woods", "zeppelin"];
 function main() {
   var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "help", color = "green";
   if (Args.fill(config, command), config.help) {
@@ -2214,7 +2214,19 @@ function main() {
   });
   try {
     if (config.auto || config.fullDiagnostic) {
-      (0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.visitUrl)("questlog.php?which=1"), (0, import_kolmafia7.visitUrl)("questlog.php?which=2"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_wrong"), (0, import_kolmafia7.visitUrl)("place.php?whichplace=town_right"), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid));
+      (0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.print)("Touring the Kingdom", color);
+      var _iterator = _createForOfIteratorHelper3(places), _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+          var place = _step.value;
+          (0, import_kolmafia7.visitUrl)(place.includes(".php") ? place : "place.php?whichplace=".concat(place));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid));
       var locketResponse = (0, import_kolmafia7.visitUrl)("inventory.php?reminisce=1", !1);
       if (locketResponse.includes("You don't want to reminisce any more today.")) {
         var oldLocket = get("_locketMonstersFought").split(","), newLocket = oldLocket.concat(new Array(3).fill(0)).slice(0, 3);
@@ -2235,40 +2247,40 @@ function main() {
     }
     if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
       (0, import_kolmafia7.print)("Checking all effect descriptions", color);
-      var _iterator = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done; ) {
-          var e = _step.value;
-          (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-      (0, import_kolmafia7.print)("Checking all skill descriptions", color);
-      var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step2;
+      var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-          var s = _step2.value;
-          (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
+          var e = _step2.value;
+          (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
         }
       } catch (err) {
         _iterator2.e(err);
       } finally {
         _iterator2.f();
       }
-      (0, import_kolmafia7.print)("Checking all item descriptions", color);
-      var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step3;
+      (0, import_kolmafia7.print)("Checking all skill descriptions", color);
+      var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
-          var i = _step3.value;
-          (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
+          var s = _step3.value;
+          (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
         }
       } catch (err) {
         _iterator3.e(err);
       } finally {
         _iterator3.f();
+      }
+      (0, import_kolmafia7.print)("Checking all item descriptions", color);
+      var _iterator4 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done; ) {
+          var i = _step4.value;
+          (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
       }
     }
     var toggle = function(prop) {
