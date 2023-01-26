@@ -1,5 +1,15 @@
 import { Args } from "grimoire-kolmafia";
-import { Effect, handlingChoice, Item, print, Skill, toInt, visitUrl } from "kolmafia";
+import {
+  Effect,
+  handlingChoice,
+  Item,
+  print,
+  Skill,
+  toInt,
+  visitUrl,
+  setProperty,
+  sessionLogs,
+} from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
@@ -70,6 +80,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   voa: Args.number({
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
+    setting: "",
+  }),
+  session: Args.flag({
+    help: "Parse session log to try recover any changed preferences using what was logged",
     setting: "",
   }),
 });
@@ -198,6 +212,27 @@ export default function main(command = "help"): void {
       print("Checking all item descriptions", color);
       for (const i of Item.all()) {
         visitUrl(`desc_item.php?whichitem=${i.descid}`);
+      }
+    }
+
+    if (config.session || config.maxAll) {
+      const logs = sessionLogs(1);
+
+      if (logs.length > 0) {
+        const prefs: Map<string, string> = new Map();
+        const prefRegex = /^Preference (.+?) changed from (?:.*?) to (.*)$/;
+
+        for (const line of logs[0].split(/[\n\r]+/)) {
+          const match = line.match(prefRegex);
+
+          if (match === null) continue;
+
+          prefs.set(match[1], match[2]);
+        }
+
+        for (const [pref, value] of prefs) {
+          setProperty(pref, value);
+        }
       }
     }
 
