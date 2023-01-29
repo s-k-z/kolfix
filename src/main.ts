@@ -4,11 +4,11 @@ import {
   handlingChoice,
   Item,
   print,
+  sessionLogs,
+  setProperty,
   Skill,
   toInt,
   visitUrl,
-  setProperty,
-  sessionLogs,
 } from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
