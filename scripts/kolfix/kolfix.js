@@ -2144,6 +2144,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
     setting: ""
   }),
+  disableCombatSkills: Args.flag({
+    help: "Sets daily limited combat skills to their fully expended states (until rollover or ascension)",
+    setting: ""
+  }),
   disableLegendaryPizzas: Args.flag({
     help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: ""
@@ -2245,7 +2249,7 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), config.fullDiagnostic) {
+    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0)), config.fullDiagnostic) {
       (0, import_kolmafia7.print)("Checking all effect descriptions", color);
       var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step2;
       try {
