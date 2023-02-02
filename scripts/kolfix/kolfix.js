@@ -2201,6 +2201,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: ""
   }),
+  popups: Args.flag({
+    help: "Toggle the suppressNegativeStatusPopup flag. This suppresses mini-browser windows from opening when using various items, typically those with detrimental effects.",
+    setting: ""
+  }),
   voa: Args.number({
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
     setting: ""
@@ -2294,7 +2298,7 @@ function main() {
       var _config$numberology, _config$pool;
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
-    config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool);
+    config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.popups && _set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", !1));
     var warn = function(key, value) {
       (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value, " is not recommended, red"));
     };
