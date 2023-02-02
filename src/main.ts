@@ -72,6 +72,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
     setting: "",
   }),
+  popups: Args.flag({
+    help: "Toggle the suppressNegativeStatusPopup flag. This suppresses mini-browser windows from opening when using various items, typically those with detrimental effects.",
+    setting: "",
+  }),
   voa: Args.number({
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
     setting: "",
@@ -256,6 +260,10 @@ export default function main(command = "help"): void {
 
     if (config.numberology) set("skillLevel144", config.numberology);
     if (config.pool) set("poolSharkCount", config.pool);
+
+    if (config.popups) {
+      set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", false));
+    }
 
     const warn = (key: string, value: number) => {
       print(`Warning: ${key} ${value} is not recommended, red`);
