@@ -1,5 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import { Effect, handlingChoice, Item, print, Skill, toInt, visitUrl } from "kolmafia";
+import { handlingChoice, print, visitUrl } from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
@@ -33,11 +33,6 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   disableShotglass: Args.flag({
     help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
-    setting: "",
-  }),
-  fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
-    hidden: true,
     setting: "",
   }),
   gingerbread: Args.flag({
@@ -132,7 +127,7 @@ export default function main(command = "help"): void {
   propertyManager.set({ logPreferenceChange: true });
 
   try {
-    if (config.auto || config.fullDiagnostic) {
+    if (config.auto) {
       print("Checking properties", color);
 
       print("Touring the Kingdom", color);
@@ -216,23 +211,6 @@ export default function main(command = "help"): void {
       set("_stinkyCheeseBanisherUsed", true);
       set("_usedReplicaBatoomerang", 3);
       set("_vmaskBanisherUsed", true);
-    }
-
-    if (config.fullDiagnostic) {
-      print("Checking all effect descriptions", color);
-      for (const e of Effect.all()) {
-        visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
-      }
-
-      print("Checking all skill descriptions", color);
-      for (const s of Skill.all()) {
-        visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
-      }
-
-      print("Checking all item descriptions", color);
-      for (const i of Item.all()) {
-        visitUrl(`desc_item.php?whichitem=${i.descid}`);
-      }
     }
 
     const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
