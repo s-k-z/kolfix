@@ -2160,11 +2160,6 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
     setting: ""
   }),
-  fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
-    hidden: !0,
-    setting: ""
-  }),
   gingerbread: Args.flag({
     help: "Toggle gingerbread city permanent unlock and all upgrades",
     setting: ""
@@ -2217,7 +2212,7 @@ function main() {
     logPreferenceChange: !0
   });
   try {
-    if (config.auto || config.fullDiagnostic) {
+    if (config.auto) {
       (0, import_kolmafia7.print)("Checking properties", color), (0, import_kolmafia7.print)("Touring the Kingdom", color);
       var _iterator = _createForOfIteratorHelper3(places), _step;
       try {
@@ -2249,44 +2244,7 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0)), config.fullDiagnostic) {
-      (0, import_kolmafia7.print)("Checking all effect descriptions", color);
-      var _iterator2 = _createForOfIteratorHelper3(import_kolmafia7.Effect.all()), _step2;
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-          var e = _step2.value;
-          (0, import_kolmafia7.visitUrl)("desc_effect.php?whicheffect=".concat(e.descid));
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-      (0, import_kolmafia7.print)("Checking all skill descriptions", color);
-      var _iterator3 = _createForOfIteratorHelper3(import_kolmafia7.Skill.all()), _step3;
-      try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
-          var s = _step3.value;
-          (0, import_kolmafia7.visitUrl)("desc_skill.php?whichskill=".concat((0, import_kolmafia7.toInt)(s)));
-        }
-      } catch (err) {
-        _iterator3.e(err);
-      } finally {
-        _iterator3.f();
-      }
-      (0, import_kolmafia7.print)("Checking all item descriptions", color);
-      var _iterator4 = _createForOfIteratorHelper3(import_kolmafia7.Item.all()), _step4;
-      try {
-        for (_iterator4.s(); !(_step4 = _iterator4.n()).done; ) {
-          var i = _step4.value;
-          (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
-        }
-      } catch (err) {
-        _iterator4.e(err);
-      } finally {
-        _iterator4.f();
-      }
-    }
+    (config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0));
     var toggle = function(prop) {
       return _set(prop, config.maxAll || !get(prop));
     };
