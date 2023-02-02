@@ -15,6 +15,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
     setting: "",
   }),
+  disableCombatSkills: Args.flag({
+    help: "Sets daily limited combat skills to their fully expended states (until rollover or ascension)",
+    setting: "",
+  }),
   disableLegendaryPizzas: Args.flag({
     help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: "",
