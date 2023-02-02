@@ -15,6 +15,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
     setting: "",
   }),
+  disableCombatSkills: Args.flag({
+    help: "Sets daily limited combat skills to their fully expended states (until rollover or ascension)",
+    setting: "",
+  }),
   disableLegendaryPizzas: Args.flag({
     help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: "",
@@ -182,6 +186,32 @@ export default function main(command = "help"): void {
 
     if (config.disableSausageGoblin || config.disableAll) {
       set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
+    }
+
+    if (config.disableCombatSkills || config.disableAll) {
+      set("_chestXRayUsed", 3);
+      set("_drunkPygmyBanishes", 11);
+      set("_feelHatredUsed", 3);
+      set("_feelLostUsed", 3);
+      set("_firedJokestersGun", true);
+      set("_gingerbreadMobHitUsed", true);
+      set("_glarkCableUses", 5);
+      set("_humanMuskUses", 3);
+      set("_kgbTranquilizerDartUses", 3);
+      set("_latteBanishUsed", true);
+      set("_macrometeoriteUses", 10);
+      set("_mafiaMiddleFingerRingUsed", true);
+      set("_missileLauncherUsed", true);
+      set("_monstersMapped", 3);
+      set("_navelRunaways", 3);
+      set("_reflexHammerUsed", 3);
+      set("_saberForceUses", 5);
+      set("_shatteringPunchUsed", 3);
+      set("_snokebombUsed", 3);
+      set("_steelyEyedSquintUsed", true);
+      set("_stinkyCheeseBanisherUsed", true);
+      set("_usedReplicaBatoomerang", 3);
+      set("_vmaskBanisherUsed", true);
     }
 
     if (config.fullDiagnostic) {
