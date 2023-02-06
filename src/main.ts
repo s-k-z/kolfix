@@ -1,15 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import {
-  Effect,
-  handlingChoice,
-  Item,
-  print,
-  sessionLogs,
-  setProperty,
-  Skill,
-  toInt,
-  visitUrl,
-} from "kolmafia";
+import { handlingChoice, print, sessionLogs, setProperty, visitUrl } from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
