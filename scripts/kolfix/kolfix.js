@@ -2075,6 +2075,36 @@ var import_kolmafia5 = require("kolmafia");
 // src/main.ts
 var import_kolmafia7 = require("kolmafia");
 var _templateObject, _templateObject2, _templateObject3;
+function _slicedToArray2(arr, i) {
+  return _arrayWithHoles2(arr) || _iterableToArrayLimit2(arr, i) || _unsupportedIterableToArray4(arr, i) || _nonIterableRest2();
+}
+function _nonIterableRest2() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _iterableToArrayLimit2(arr, i) {
+  var _i = arr == null ? null : typeof Symbol != "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+  if (_i != null) {
+    var _arr = [], _n = !0, _d = !1, _s, _e;
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done) && (_arr.push(_s.value), !(i && _arr.length === i)); _n = !0)
+        ;
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        !_n && _i.return != null && _i.return();
+      } finally {
+        if (_d)
+          throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+function _arrayWithHoles2(arr) {
+  if (Array.isArray(arr))
+    return arr;
+}
 function _taggedTemplateLiteral(strings, raw) {
   return raw || (raw = strings.slice(0)), Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
 }
@@ -2087,8 +2117,8 @@ function _createForOfIteratorHelper3(o, allowArrayLike) {
       };
       return { s: F, n: function() {
         return i >= o.length ? { done: !0 } : { done: !1, value: o[i++] };
-      }, e: function(_e) {
-        throw _e;
+      }, e: function(_e2) {
+        throw _e2;
       }, f: F };
     }
     throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
@@ -2099,8 +2129,8 @@ function _createForOfIteratorHelper3(o, allowArrayLike) {
   }, n: function() {
     var step = it.next();
     return normalCompletion = step.done, step;
-  }, e: function(_e2) {
-    didErr = !0, err = _e2;
+  }, e: function(_e3) {
+    didErr = !0, err = _e3;
   }, f: function() {
     try {
       !normalCompletion && it.return != null && it.return();
@@ -2199,6 +2229,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
   voa: Args.number({
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
     setting: ""
+  }),
+  session: Args.flag({
+    help: "Parse session log to try recover any changed preferences using what was logged",
+    setting: ""
   })
 }), places = ["bathole", "beanstalk", "canadia", "da.php", "desertbeach", "gingerbreadcity", "hiddencity", "highlands", "main.php", "manor1", "manor2", "manor3", "manor4", "marais", "mclargehuge?action=cloudypeak", "mclargehuge?action=trappercabin", "monorail", "mountains.php", "orc_chasm", "plains", "pyramid", "questlog.php?which=1", "questlog.php?which=2", "realm_fantasy", "realm_pirate", "sea_oldman", "spacegate", "speakeasy", "tavern", "town_right", "town_wrong", "town", "woods", "zeppelin"];
 function main() {
@@ -2244,7 +2278,33 @@ function main() {
         (0, import_kolmafia7.visitUrl)("craft.php?mode=discoveries&what=".concat(craft));
       }
     }
-    (config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0));
+    if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0)), config.session) {
+      var logs = (0, import_kolmafia7.sessionLogs)(1);
+      if (logs.length > 0) {
+        var prefs = /* @__PURE__ */ new Map(), prefRegex = /^Preference (.+?) changed from (?:.*?) to (.*)$/, _iterator2 = _createForOfIteratorHelper3(logs[0].split(/[\n\r]+/)), _step2;
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+            var line = _step2.value, match = line.match(prefRegex);
+            match !== null && prefs.set(match[1], match[2]);
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+        var _iterator3 = _createForOfIteratorHelper3(prefs), _step3;
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done; ) {
+            var _step3$value = _slicedToArray2(_step3.value, 2), pref = _step3$value[0], value = _step3$value[1];
+            (0, import_kolmafia7.setProperty)(pref, value);
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      }
+    }
     var toggle = function(prop) {
       return _set(prop, config.maxAll || !get(prop));
     };
@@ -2253,8 +2313,8 @@ function main() {
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
     config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.popups && _set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", !1));
-    var warn = function(key, value) {
-      (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value, " is not recommended, red"));
+    var warn = function(key, value2) {
+      (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value2, " is not recommended, red"));
     };
     config.mall && (config.mall > 25e4 && warn("autoBuyPriceLimit", config.mall), _set("autoBuyPriceLimit", config.mall)), config.voa && (config.voa > 1e4 && warn("valueOfAdventure", config.voa), _set("valueOfAdventure", config.voa)), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
   } finally {
