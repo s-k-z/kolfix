@@ -217,7 +217,7 @@ export default function main(command = "help"): void {
       set("_vmaskBanisherUsed", true);
     }
 
-    if (config.session || config.maxAll) {
+    if (config.session) {
       const logs = sessionLogs(1);
 
       if (logs.length > 0) {
