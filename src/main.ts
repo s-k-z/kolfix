@@ -25,6 +25,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Sets daily/lifetime flags below to their disabled state, and sets cleaver to safe values",
     setting: "",
   }),
+  disableCombatSkills: Args.flag({
+    help: "Sets daily limited combat skills to their fully expended states (until rollover or ascension)",
+    setting: "",
+  }),
   disableLegendaryPizzas: Args.flag({
     help: "Sets legendary cookbookbat pizzas to eaten (until ascension)",
     setting: "",
@@ -39,11 +43,6 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   disableShotglass: Args.flag({
     help: "Set the Mime Army Shotglass flag to used (until rollover or ascension)",
-    setting: "",
-  }),
-  fullDiagnostic: Args.flag({
-    help: "Check basically everything in the game that KoLmafia knows about (WARNING: EXTREMELY SLOW)",
-    hidden: true,
     setting: "",
   }),
   gingerbread: Args.flag({
@@ -76,6 +75,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   pool: Args.number({
     help: "Set the number of times you've Rack'd 'em up at a Shark's Chum for pool skill (max 25)",
+    setting: "",
+  }),
+  popups: Args.flag({
+    help: "Toggle the suppressNegativeStatusPopup flag. This suppresses mini-browser windows from opening when using various items, typically those with detrimental effects.",
     setting: "",
   }),
   voa: Args.number({
@@ -138,7 +141,7 @@ export default function main(command = "help"): void {
   propertyManager.set({ logPreferenceChange: true });
 
   try {
-    if (config.auto || config.fullDiagnostic) {
+    if (config.auto) {
       print("Checking properties", color);
 
       print("Touring the Kingdom", color);
@@ -198,21 +201,30 @@ export default function main(command = "help"): void {
       set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
     }
 
-    if (config.fullDiagnostic) {
-      print("Checking all effect descriptions", color);
-      for (const e of Effect.all()) {
-        visitUrl(`desc_effect.php?whicheffect=${e.descid}`);
-      }
-
-      print("Checking all skill descriptions", color);
-      for (const s of Skill.all()) {
-        visitUrl(`desc_skill.php?whichskill=${toInt(s)}`);
-      }
-
-      print("Checking all item descriptions", color);
-      for (const i of Item.all()) {
-        visitUrl(`desc_item.php?whichitem=${i.descid}`);
-      }
+    if (config.disableCombatSkills || config.disableAll) {
+      set("_chestXRayUsed", 3);
+      set("_drunkPygmyBanishes", 11);
+      set("_feelHatredUsed", 3);
+      set("_feelLostUsed", 3);
+      set("_firedJokestersGun", true);
+      set("_gingerbreadMobHitUsed", true);
+      set("_glarkCableUses", 5);
+      set("_humanMuskUses", 3);
+      set("_kgbTranquilizerDartUses", 3);
+      set("_latteBanishUsed", true);
+      set("_macrometeoriteUses", 10);
+      set("_mafiaMiddleFingerRingUsed", true);
+      set("_missileLauncherUsed", true);
+      set("_monstersMapped", 3);
+      set("_navelRunaways", 3);
+      set("_reflexHammerUsed", 3);
+      set("_saberForceUses", 5);
+      set("_shatteringPunchUsed", 3);
+      set("_snokebombUsed", 3);
+      set("_steelyEyedSquintUsed", true);
+      set("_stinkyCheeseBanisherUsed", true);
+      set("_usedReplicaBatoomerang", 3);
+      set("_vmaskBanisherUsed", true);
     }
 
     if (config.session || config.maxAll) {
@@ -261,6 +273,10 @@ export default function main(command = "help"): void {
 
     if (config.numberology) set("skillLevel144", config.numberology);
     if (config.pool) set("poolSharkCount", config.pool);
+
+    if (config.popups) {
+      set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", false));
+    }
 
     const warn = (key: string, value: number) => {
       print(`Warning: ${key} ${value} is not recommended, red`);
