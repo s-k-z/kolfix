@@ -2191,7 +2191,7 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     setting: ""
   }),
   gingerbread: Args.flag({
-    help: "Toggle gingerbread city permanent unlock and all upgrades",
+    help: "Toggle Gingerbread City permanent unlock and Wall-Thickening. (Digital Clock Tower, Retail District, and Sewers can be checked with auto)",
     setting: ""
   }),
   glitch: Args.number({
@@ -2211,7 +2211,7 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     setting: ""
   }),
   maxAll: Args.flag({
-    help: "Set permanent pool skill and manuals of numberology to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
+    help: "Set permanent pool skill and manuals of numberology to the maximum values, mark Tunnel of L.O.V.E. permanently unlocked, and Gingerbread City as permanently unlocked with wall thickening",
     setting: ""
   }),
   numberology: Args.number({
@@ -2345,7 +2345,7 @@ function main() {
     var toggle = function(prop) {
       return _set(prop, config.maxAll || !get(prop));
     };
-    if ((config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " everything for Gingerbread City"), color), toggle("gingerbreadCityAvailable"), toggle("gingerAdvanceClockUnlocked"), toggle("gingerExtraAdventures"), toggle("gingerRetailUnlocked"), toggle("gingerSewersUnlocked")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), config.max || config.maxAll) {
+    if ((config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Gingerbread City permanent unlock and wall-thickening"), color), toggle("gingerbreadCityAvailable"), toggle("gingerExtraAdventures")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), config.max || config.maxAll) {
       var _config$numberology, _config$pool;
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
