@@ -116,6 +116,7 @@ const places = [
   "town_wrong",
   "town",
   "woods",
+  "campaway", // explicitly checked after woods
   "zeppelin",
 ] as const;
 

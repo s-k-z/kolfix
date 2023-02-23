@@ -8,6 +8,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 - Crafting Discoveries/Recipes Learned (notably [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) recipes)
 - [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) - only if used up completely today (adds zeroes to the property if necessary)
+- [Distant Woods Getaway](https://kol.coldfront.net/thekolwiki/index.php/Your_Campsite_Away_From_Your_Campsite)
 - Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
 - Quests including any [Protonic ghost](https://kol.coldfront.net/thekolwiki/index.php/Protonic_accelerator_pack) location
 - [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) - some properties can't be read if you've used all the resources today
