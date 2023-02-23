@@ -109,6 +109,7 @@ const places = [
   "realm_pirate",
   "sea_oldman",
   "spacegate",
+  "spacegate&action=sg_vaccinator",
   "speakeasy",
   "tavern",
   "town_right",
