@@ -2234,7 +2234,7 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Parse session log to try recover any changed preferences using what was logged",
     setting: ""
   })
-}), places = ["bathole", "beanstalk", "canadia", "da.php", "desertbeach", "gingerbreadcity", "hiddencity", "highlands", "main.php", "manor1", "manor2", "manor3", "manor4", "marais", "mclargehuge?action=cloudypeak", "mclargehuge?action=trappercabin", "monorail", "mountains.php", "orc_chasm", "plains", "pyramid", "questlog.php?which=1", "questlog.php?which=2", "realm_fantasy", "realm_pirate", "sea_oldman", "spacegate", "speakeasy", "tavern", "town_right", "town_wrong", "town", "woods", "zeppelin"];
+}), places = ["bathole", "beanstalk", "canadia", "da.php", "desertbeach", "gingerbreadcity", "hiddencity", "highlands", "main.php", "manor1", "manor2", "manor3", "manor4", "marais", "mclargehuge?action=cloudypeak", "mclargehuge?action=trappercabin", "monorail", "mountains.php", "orc_chasm", "plains", "pyramid", "questlog.php?which=1", "questlog.php?which=2", "realm_fantasy", "realm_pirate", "sea_oldman", "spacegate", "spacegate&action=sg_vaccinator", "speakeasy", "tavern", "town_right", "town_wrong", "town", "woods", "zeppelin"];
 function main() {
   var command = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : "help", color = "green";
   if (Args.fill(config, command), config.help) {
