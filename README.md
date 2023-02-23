@@ -11,6 +11,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 - Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
 - Quests including any [Protonic ghost](https://kol.coldfront.net/thekolwiki/index.php/Protonic_accelerator_pack) location
 - [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) - some properties can't be read if you've used all the resources today
+- [Spacegate Vaccination Machine](https://kol.coldfront.net/thekolwiki/index.php/Spacegate_Vaccination_Machine) - these properties can't be read if you've received a vaccine today
 - Sweat from [Designer Sweatpants](https://kol.coldfront.net/thekolwiki/index.php/Designer_sweatpants)
 
 **Requires Individual Setting or `maxAll` (if a maximum exists):**
