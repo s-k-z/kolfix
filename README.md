@@ -8,7 +8,8 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 - Crafting Discoveries/Recipes Learned (notably [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) recipes)
 - [Combat Lover's Locket](https://kol.coldfront.net/thekolwiki/index.php/Combat_lover%27s_locket) - only if used up completely today (adds zeroes to the property if necessary)
-- [Distant Woods Getaway](https://kol.coldfront.net/thekolwiki/index.php/Your_Campsite_Away_From_Your_Campsite)
+- [Distant Woods Getaway Campsite](https://kol.coldfront.net/thekolwiki/index.php/Your_Campsite_Away_From_Your_Campsite)
+- [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) - digital clock, retail district and sewers can be updated by visiting the zone (permanent ownership and wall-thickening can't be determined automatically)
 - Puzzle Champ from [Witchess](https://kol.coldfront.net/thekolwiki/index.php/Your_Witchess_Set)
 - Quests including any [Protonic ghost](https://kol.coldfront.net/thekolwiki/index.php/Protonic_accelerator_pack) location
 - [Source Terminal](https://kol.coldfront.net/thekolwiki/index.php/Source_Terminal) - some properties can't be read if you've used all the resources today
@@ -19,7 +20,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 - [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name) implementations
 - Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
-- [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) permanent unlock and all upgrades
+- [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) permanent unlock along with [wall-thickening](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) (+10 extra turns)
 - Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum) - your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$
 - [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.) permanent unlock
 
@@ -32,7 +33,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 
 **LIfetime Flag Fixes (persist until ascension):**
 
-- Legendary [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) pizzas eaten
+- Mark legendary [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) pizzas as eaten
 
 ## Installation
 

@@ -36,7 +36,7 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   gingerbread: Args.flag({
-    help: "Toggle gingerbread city permanent unlock and all upgrades",
+    help: "Toggle Gingerbread City permanent unlock and Wall-Thickening. (Digital Clock Tower, Retail District, and Sewers can be checked with auto)",
     setting: "",
   }),
   glitch: Args.number({
@@ -56,7 +56,7 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   maxAll: Args.flag({
-    help: "Set permanent pool skill and manuals of numberology to the maximum values and mark Tunnel of L.O.V.E./Gingerbread City as fully owned and upgraded",
+    help: "Set permanent pool skill and manuals of numberology to the maximum values, mark Tunnel of L.O.V.E. permanently unlocked, and Gingerbread City as permanently unlocked with wall thickening",
     setting: "",
   }),
   numberology: Args.number({
@@ -243,12 +243,14 @@ export default function main(command = "help"): void {
     const toggle = (prop: string) => set(prop, config.maxAll || !get(prop));
 
     if (config.gingerbread || config.maxAll) {
-      print(`${config.maxAll ? "Unlocking" : "Toggling"} everything for Gingerbread City`, color);
+      print(
+        `${
+          config.maxAll ? "Unlocking" : "Toggling"
+        } Gingerbread City permanent unlock and wall-thickening`,
+        color
+      );
       toggle("gingerbreadCityAvailable");
-      toggle("gingerAdvanceClockUnlocked");
       toggle("gingerExtraAdventures");
-      toggle("gingerRetailUnlocked");
-      toggle("gingerSewersUnlocked");
     }
 
     if (config.glitch) set("glitchItemImplementationCount", config.glitch);
