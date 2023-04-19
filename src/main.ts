@@ -1,5 +1,13 @@
 import { Args } from "grimoire-kolmafia";
-import { handlingChoice, print, printHtml, sessionLogs, setProperty, visitUrl } from "kolmafia";
+import {
+  handlingChoice,
+  print,
+  printHtml,
+  propertyDefaultValue,
+  sessionLogs,
+  setProperty,
+  visitUrl,
+} from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
@@ -57,6 +65,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   maxAll: Args.flag({
     help: "Set permanent pool skill and manuals of numberology to the maximum values, mark Tunnel of L.O.V.E. permanently unlocked, and Gingerbread City as permanently unlocked with wall thickening",
+    setting: "",
+  }),
+  maximizer: Args.flag({
+    help: "Set the maximizer recent history to the default value. This is useful for when the maximizer history is no longer updating properly.",
     setting: "",
   }),
   numberology: Args.number({
@@ -267,6 +279,11 @@ export default function main(command = "help"): void {
     if (config.max || config.maxAll) {
       config.numberology = config.numberology ?? 5;
       config.pool = config.pool ?? 25;
+    }
+
+    if (config.maximizer) {
+      print("Resetting maximizer history");
+      set("maximizerMRUList", propertyDefaultValue("maximizerMRUList"));
     }
 
     if (config.numberology) set("skillLevel144", config.numberology);
