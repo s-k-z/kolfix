@@ -2214,6 +2214,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Set permanent pool skill and manuals of numberology to the maximum values, mark Tunnel of L.O.V.E. permanently unlocked, and Gingerbread City as permanently unlocked with wall thickening",
     setting: ""
   }),
+  maximizer: Args.flag({
+    help: "Set the maximizer recent history to the default value. This is useful for when the maximizer history is no longer updating properly.",
+    setting: ""
+  }),
   numberology: Args.number({
     help: "Set the number of Manuals of Numberology you've enumerated (max 5)",
     setting: ""
@@ -2353,7 +2357,7 @@ function main() {
       var _config$numberology, _config$pool;
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
-    config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.popups && _set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", !1));
+    config.maximizer && ((0, import_kolmafia7.print)("Resetting maximizer history"), _set("maximizerMRUList", (0, import_kolmafia7.propertyDefaultValue)("maximizerMRUList"))), config.numberology && _set("skillLevel144", config.numberology), config.pool && _set("poolSharkCount", config.pool), config.popups && _set("suppressNegativeStatusPopup", !get("suppressNegativeStatusPopup", !1));
     var warn = function(key, value2) {
       (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value2, " is not recommended, red"));
     };
