@@ -2226,6 +2226,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Toggle the suppressNegativeStatusPopup flag. This suppresses mini-browser windows from opening when using various items, typically those with detrimental effects.",
     setting: ""
   }),
+  recommend: Args.flag({
+    help: "Print a list of manual recommendations.",
+    setting: ""
+  }),
   voa: Args.number({
     help: "Set the valueOfAdventure (no max, but not recommended above 10k)",
     setting: ""
@@ -2342,8 +2346,8 @@ function main() {
         }
       }
     }
-    var toggle = function(prop) {
-      return _set(prop, config.maxAll || !get(prop));
+    var toggle = function(prop2) {
+      return _set(prop2, config.maxAll || !get(prop2));
     };
     if ((config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Gingerbread City permanent unlock and wall-thickening"), color), toggle("gingerbreadCityAvailable"), toggle("gingerExtraAdventures")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), config.max || config.maxAll) {
       var _config$numberology, _config$pool;
@@ -2353,7 +2357,41 @@ function main() {
     var warn = function(key, value2) {
       (0, import_kolmafia7.print)("Warning: ".concat(key, " ").concat(value2, " is not recommended, red"));
     };
-    config.mall && (config.mall > 25e4 && warn("autoBuyPriceLimit", config.mall), _set("autoBuyPriceLimit", config.mall)), config.voa && (config.voa > 1e4 && warn("valueOfAdventure", config.voa), _set("valueOfAdventure", config.voa)), (0, import_kolmafia7.print)("Presto fixo! All done.", color);
+    if (config.mall && (config.mall > 25e4 && warn("autoBuyPriceLimit", config.mall), _set("autoBuyPriceLimit", config.mall)), config.voa && (config.voa > 1e4 && warn("valueOfAdventure", config.voa), _set("valueOfAdventure", config.voa)), config.recommend) {
+      (0, import_kolmafia7.printHtml)(["Recommended properties to inspect", "Property names and values case sensitive when being set otherwise they may not work.", "Use the command <b>prefref property</b> to check values.", 'Use the commmand <b>set caseSensitiveProperty = "new value"</b> to change it.', ""].join("<br>"));
+      for (var props = {
+        battleAction: {
+          msg: "controls how to handle combat",
+          rec: "custom combat script"
+        },
+        autoSatisfyWithCloset: {
+          msg: "will automatically take items from the closet"
+        },
+        autoSatisfyWithStash: {
+          msg: "will automatically take items from clan stash"
+        },
+        autoSatisfyWithStorage: {
+          msg: "will automatically take items from Hankg's storage",
+          rec: "true"
+        },
+        autoSatisfyWithNPCs: {
+          msg: "will automatically buy items from npc stores with meat",
+          rec: "true"
+        },
+        autoSatisfyWithCoinmasters: {
+          msg: "will automatically buy items from npc stores with other currency",
+          rec: "true"
+        },
+        autoSatisfyWithMall: {
+          msg: "will automatically buy items from the mall",
+          rec: "true"
+        }
+      }, _i3 = 0, _Object$entries = Object.entries(props); _i3 < _Object$entries.length; _i3++) {
+        var _val$rec, _Object$entries$_i = _slicedToArray2(_Object$entries[_i3], 2), prop = _Object$entries$_i[0], val = _Object$entries$_i[1], _warn = val.rec && ((_val$rec = val.rec) === null || _val$rec === void 0 ? void 0 : _val$rec.toString()) !== get(prop).toString();
+        (0, import_kolmafia7.printHtml)("<b>".concat(prop, "</b> ").concat(val.msg, ".").concat(val.rec ? " Recommend: <b>".concat(val.rec, "</b>") : "", " Currently: ").concat(_warn ? '<a color="red">' : "", "<b>").concat(get(prop), "</b>").concat(_warn ? "</a>" : ""));
+      }
+    }
+    (0, import_kolmafia7.print)("Presto fixo! All done.", color);
   } finally {
     propertyManager.resetAll();
   }
