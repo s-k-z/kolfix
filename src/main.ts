@@ -1,5 +1,5 @@
 import { Args } from "grimoire-kolmafia";
-import { handlingChoice, print, sessionLogs, setProperty, visitUrl } from "kolmafia";
+import { handlingChoice, print, printHtml, sessionLogs, setProperty, visitUrl } from "kolmafia";
 import { $effect, $item, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
@@ -69,6 +69,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
   }),
   popups: Args.flag({
     help: "Toggle the suppressNegativeStatusPopup flag. This suppresses mini-browser windows from opening when using various items, typically those with detrimental effects.",
+    setting: "",
+  }),
+  recommend: Args.flag({
+    help: "Print a list of manual recommendations.",
     setting: "",
   }),
   voa: Args.number({
@@ -284,6 +288,54 @@ export default function main(command = "help"): void {
     if (config.voa) {
       if (config.voa > 10000) warn("valueOfAdventure", config.voa);
       set("valueOfAdventure", config.voa);
+    }
+
+    if (config.recommend) {
+      printHtml(
+        [
+          "Recommended properties to inspect",
+          "Property names and values case sensitive when being set otherwise they may not work.",
+          "Use the command <b>prefref property</b> to check values.",
+          `Use the commmand <b>set caseSensitiveProperty = "new value"</b> to change it.`,
+          "",
+        ].join("<br>")
+      );
+      const props: Record<string, { msg: string; rec?: string }> = {
+        battleAction: {
+          msg: "controls how to handle combat",
+          rec: "custom combat script",
+        },
+        autoSatisfyWithCloset: {
+          msg: "will automatically take items from the closet",
+        },
+        autoSatisfyWithStash: {
+          msg: "will automatically take items from clan stash",
+        },
+        autoSatisfyWithStorage: {
+          msg: "will automatically take items from Hankg's storage",
+          rec: "true",
+        },
+        autoSatisfyWithNPCs: {
+          msg: "will automatically buy items from npc stores with meat",
+          rec: "true",
+        },
+        autoSatisfyWithCoinmasters: {
+          msg: "will automatically buy items from npc stores with other currency",
+          rec: "true",
+        },
+        autoSatisfyWithMall: {
+          msg: "will automatically buy items from the mall",
+          rec: "true",
+        },
+      };
+      for (const [prop, val] of Object.entries(props)) {
+        const warn = val.rec && val.rec?.toString() !== get(prop).toString();
+        printHtml(
+          `<b>${prop}</b> ${val.msg}.${val.rec ? ` Recommend: <b>${val.rec}</b>` : ""} Currently: ${
+            warn ? `<a color="red">` : ""
+          }<b>${get(prop)}</b>${warn ? "</a>" : ""}`
+        );
+      }
     }
 
     print("Presto fixo! All done.", color);
