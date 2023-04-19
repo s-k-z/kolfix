@@ -68,7 +68,7 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   maximizer: Args.flag({
-    help: "Set the maximizer recent history to the default value. This is useful for when the maximizer history is no longer updating properly.",
+    help: "Set the maximizer recent history to the default value. This is useful for when the maximizer history is no longer updating properly. (Requires a restart of KoLmafia afterwards to take effect)",
     setting: "",
   }),
   numberology: Args.number({
@@ -282,7 +282,9 @@ export default function main(command = "help"): void {
     }
 
     if (config.maximizer) {
-      print("Resetting maximizer history");
+      printHtml(
+        "Resetting maximizer history, <a color=orange>don't forget to restart KoLmafia</a>"
+      );
       set("maximizerMRUList", propertyDefaultValue("maximizerMRUList"));
     }
 
