@@ -360,6 +360,14 @@ export default function main(command = "help"): void {
     }
 
     print("Presto fixo! All done.", color);
+  } catch (err) {
+    const match = `${err}`.match(/Bad item value: (.+)/);
+    if (match) {
+      print(`Using an outdated version of KoLmafia that doesn't know about ${match[1]}?`, "red");
+      printHtml(
+        "<a href=https://github.com/kolmafia/kolmafia/releases>Click here</a> to get the latest release"
+      );
+    }
   } finally {
     propertyManager.resetAll();
   }
