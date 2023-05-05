@@ -2398,6 +2398,9 @@ function main() {
       }
     }
     (0, import_kolmafia7.print)("Presto fixo! All done.", color);
+  } catch (err) {
+    var _match = "".concat(err).match(/Bad item value: (.+)/);
+    _match && ((0, import_kolmafia7.print)("Using an outdated version of KoLmafia that doesn't know about ".concat(_match[1], "?"), "red"), (0, import_kolmafia7.printHtml)("<a href=https://github.com/kolmafia/kolmafia/releases>Click here</a> to get the latest release"));
   } finally {
     propertyManager.resetAll();
   }
