@@ -2304,7 +2304,9 @@ function main() {
       } finally {
         _iterator.f();
       }
-      (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject || (_templateObject = _taggedTemplateLiteral(["designer sweatpants"]))).descid));
+      $items(_templateObject || (_templateObject = _taggedTemplateLiteral(["Cincho de Mayo, designer sweatpants, Powerful Glove"]))).forEach(function(i) {
+        return (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat(i.descid));
+      });
       var locketResponse = (0, import_kolmafia7.visitUrl)("inventory.php?reminisce=1", !1);
       if (locketResponse.includes("You don't want to reminisce any more today.")) {
         var oldLocket = get("_locketMonstersFought").split(","), newLocket = oldLocket.concat(new Array(3).fill(0)).slice(0, 3);
