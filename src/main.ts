@@ -8,7 +8,7 @@ import {
   setProperty,
   visitUrl,
 } from "kolmafia";
-import { $effect, $item, get, PropertiesManager, set } from "libram";
+import { $effect, $item, $items, get, PropertiesManager, set } from "libram";
 
 const config = Args.create("kolfix", "For updating important KoLmafia settings", {
   auto: Args.flag({
@@ -157,7 +157,9 @@ export default function main(command = "help"): void {
         visitUrl(place.includes(".php") ? place : `place.php?whichplace=${place}`);
       }
 
-      visitUrl(`desc_item.php?whichitem=${$item`designer sweatpants`.descid}`);
+      $items`Cincho de Mayo, designer sweatpants, Powerful Glove`.forEach((i) =>
+        visitUrl(`desc_item.php?whichitem=${i.descid}`)
+      );
 
       const locketResponse = visitUrl("inventory.php?reminisce=1", false);
       if (locketResponse.includes("You don't want to reminisce any more today.")) {
