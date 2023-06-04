@@ -55,6 +55,10 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     help: "Toggle Tunnel of L.O.V.E. permanent unlock",
     setting: "",
   }),
+  ltt: Args.flag({
+    help: "Toggle LT&T permanent unlock",
+    setting: "",
+  }),
   mall: Args.number({
     help: "Set the autoBuyPriceLimit (no max, but not recommended above 250k)",
     setting: "",
@@ -276,6 +280,11 @@ export default function main(command = "help"): void {
     if (config.love || config.maxAll) {
       print(`${config.maxAll ? "Unlocking" : "Toggling"} Tunnel of L.O.V.E.`, color);
       toggle("loveTunnelAvailable");
+    }
+
+    if (config.ltt || config.maxAll) {
+      print(`${config.maxAll ? "Unlocking" : "Toggling"} LT&T`, color);
+      toggle("telegraphOfficeAvailable");
     }
 
     if (config.max || config.maxAll) {

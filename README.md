@@ -23,6 +23,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 - [\[glitch season reward name\]](https://kol.coldfront.net/thekolwiki/index.php/Glitch_season_reward_name) implementations
 - Calculate the Universe from the [Manual of Numberology](https://kol.coldfront.net/thekolwiki/index.php/Manual_of_Numberology)
 - [Gingerbread City](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) permanent unlock along with [wall-thickening](https://kol.coldfront.net/thekolwiki/index.php/Civic_Planning_Office) (+10 extra turns)
+- [LT&T Office](https://kol.coldfront.net/thekolwiki/index.php/LT%26T_Office) permanent unlock
 - Rack 'em up at [A Shark's Chum](https://kol.coldfront.net/thekolwiki/index.php/A_Shark's_Chum) - your permanent pool skill (as shown in the quest log at start of ascension) is derived from: $\lfloor2\sqrt{RackEmUps}\rfloor$
 - [Tunnel of L.O.V.E.](https://kol.coldfront.net/thekolwiki/index.php/The_Tunnel_of_L.O.V.E.) permanent unlock
 
