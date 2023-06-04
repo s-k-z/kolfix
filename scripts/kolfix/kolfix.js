@@ -2202,6 +2202,10 @@ var config = Args.create("kolfix", "For updating important KoLmafia settings", {
     help: "Toggle Tunnel of L.O.V.E. permanent unlock",
     setting: ""
   }),
+  ltt: Args.flag({
+    help: "Toggle LT&T permanent unlock",
+    setting: ""
+  }),
   mall: Args.number({
     help: "Set the autoBuyPriceLimit (no max, but not recommended above 250k)",
     setting: ""
@@ -2355,7 +2359,7 @@ function main() {
     var toggle = function(prop2) {
       return _set(prop2, config.maxAll || !get(prop2));
     };
-    if ((config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Gingerbread City permanent unlock and wall-thickening"), color), toggle("gingerbreadCityAvailable"), toggle("gingerExtraAdventures")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), config.max || config.maxAll) {
+    if ((config.gingerbread || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Gingerbread City permanent unlock and wall-thickening"), color), toggle("gingerbreadCityAvailable"), toggle("gingerExtraAdventures")), config.glitch && _set("glitchItemImplementationCount", config.glitch), (config.love || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " Tunnel of L.O.V.E."), color), toggle("loveTunnelAvailable")), (config.ltt || config.maxAll) && ((0, import_kolmafia7.print)("".concat(config.maxAll ? "Unlocking" : "Toggling", " LT&T"), color), toggle("telegraphOfficeAvailable")), config.max || config.maxAll) {
       var _config$numberology, _config$pool;
       config.numberology = (_config$numberology = config.numberology) !== null && _config$numberology !== void 0 ? _config$numberology : 5, config.pool = (_config$pool = config.pool) !== null && _config$pool !== void 0 ? _config$pool : 25;
     }
