@@ -37,6 +37,7 @@ Provides shortcuts for setting commonly used [KoLmafia](https://github.com/kolma
 **LIfetime Flag Fixes (persist until ascension):**
 
 - Mark legendary [Cookbookbat](https://kol.coldfront.net/thekolwiki/index.php/Cookbookbat) pizzas as eaten
+- Set [Shocking Lick](https://kol.coldfront.net/thekolwiki/index.php/Shocking_Lick) charges from [Potted Power Plant](https://kol.coldfront.net/thekolwiki/index.php/Potted_power_plant) batteries to 0.
 
 ## Installation
 

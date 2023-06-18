@@ -36,7 +36,11 @@ const config = Args.create("kolfix", "For updating important KoLmafia settings",
     setting: "",
   }),
   disableSausageGoblin: Args.flag({
-    help: "Set the Kramco _lastSausageMonsterTurn to max integer (until rollover or ascension)",
+    help: "Set the Kramco _lastSausageMonsterTurn property to max integer (until rollover or ascension)",
+    setting: "",
+  }),
+  disableShockingLick: Args.flag({
+    help: "Set the shockingLickCharges property from potted power plant batteries to 0 (until ascension, or until you use more batteries)",
     setting: "",
   }),
   disableShotglass: Args.flag({
@@ -213,6 +217,10 @@ export default function main(command = "help"): void {
 
     if (config.disableSausageGoblin || config.disableAll) {
       set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER);
+    }
+
+    if (config.disableShockingLick || config.disableAll) {
+      set("shockingLickCharges", 0);
     }
 
     if (config.disableCombatSkills || config.disableAll) {
