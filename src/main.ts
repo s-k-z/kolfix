@@ -1,6 +1,7 @@
 import { Args } from "grimoire-kolmafia";
 import {
   handlingChoice,
+  myName,
   print,
   printHtml,
   propertyDefaultValue,
@@ -243,8 +244,26 @@ export default function main(command = "help"): void {
       if (logs.length > 0) {
         const prefs: Map<string, string> = new Map();
         const prefRegex = /^Preference (.+?) changed from (?:.*?) to (.*)$/;
+        let startedSession = false;
+        const username = myName();
 
         for (const line of logs[0].split(/[\n\r]+/)) {
+          // The following session check will not break for old mafia versions
+          // If line is to start a session
+          if (line === `Initializing session for ${username}...`) {
+            // The previous session wasn't closed properly, this should be after the corruption
+            if (startedSession) {
+              break;
+            }
+
+            // Set to true as session has opened
+            startedSession = true;
+            // If line is when the session was closed
+          } else if (line === `Closing session for ${username}...`) {
+            // Set to false as session has closed
+            startedSession = false;
+          }
+
           const match = line.match(prefRegex);
 
           if (match === null) continue;
