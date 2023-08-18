@@ -250,7 +250,7 @@ export default function main(command = "help"): void {
         for (const line of logs[0].split(/[\n\r]+/)) {
           // The following session check will not break for old mafia versions
           // If line is to start a session
-          if (line === `Initializing session for ${username}...`) {
+          if (line.toLowerCase() === `Initializing session for ${username}...`.toLowerCase()) {
             // The previous session wasn't closed properly, this should be after the corruption
             if (startedSession) {
               break;
@@ -259,7 +259,7 @@ export default function main(command = "help"): void {
             // Set to true as session has opened
             startedSession = true;
             // If line is when the session was closed
-          } else if (line === `Closing session for ${username}...`) {
+          } else if (line.toLowerCase() === `Closing session for ${username}...`.toLowerCase()) {
             // Set to false as session has closed
             startedSession = false;
           }
