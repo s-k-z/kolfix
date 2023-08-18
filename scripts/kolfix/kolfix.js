@@ -2336,10 +2336,17 @@ function main() {
     if ((config.cleaver || config.disableAll) && ((0, import_kolmafia7.print)("Setting June Cleaver to safe values", color), (0, import_kolmafia7.visitUrl)("desc_item.php?whichitem=".concat($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["June cleaver"]))).descid)), _set("_juneCleaverEncounters", 10), _set("_juneCleaverSkips", 5), _set("_juneCleaverFightsLeft", 30)), (config.disableLegendaryPizzas || config.disableAll) && ((0, import_kolmafia7.print)("Setting all Cookbookbat legendary pizzas as eaten this lifetime", color), _set("calzoneOfLegendEaten", !0), _set("deepDishOfLegendEaten", !0), _set("pizzaOfLegendEaten", !0)), (config.disableLocket || config.disableAll) && _set("_locketMonstersFought", "0,0,0"), (config.disableShotglass || config.disableAll) && _set("_mimeArmyShotglassUsed", !0), (config.disableSausageGoblin || config.disableAll) && _set("_lastSausageMonsterTurn", Number.MAX_SAFE_INTEGER), (config.disableShockingLick || config.disableAll) && _set("shockingLickCharges", 0), (config.disableCombatSkills || config.disableAll) && (_set("_chestXRayUsed", 3), _set("_drunkPygmyBanishes", 11), _set("_feelHatredUsed", 3), _set("_feelLostUsed", 3), _set("_firedJokestersGun", !0), _set("_gingerbreadMobHitUsed", !0), _set("_glarkCableUses", 5), _set("_humanMuskUses", 3), _set("_kgbTranquilizerDartUses", 3), _set("_latteBanishUsed", !0), _set("_macrometeoriteUses", 10), _set("_mafiaMiddleFingerRingUsed", !0), _set("_missileLauncherUsed", !0), _set("_monstersMapped", 3), _set("_navelRunaways", 3), _set("_reflexHammerUsed", 3), _set("_saberForceUses", 5), _set("_shatteringPunchUsed", 3), _set("_snokebombUsed", 3), _set("_steelyEyedSquintUsed", !0), _set("_stinkyCheeseBanisherUsed", !0), _set("_usedReplicaBatoomerang", 3), _set("_vmaskBanisherUsed", !0)), config.session) {
       var logs = (0, import_kolmafia7.sessionLogs)(1);
       if (logs.length > 0) {
-        var prefs = /* @__PURE__ */ new Map(), prefRegex = /^Preference (.+?) changed from (?:.*?) to (.*)$/, _iterator2 = _createForOfIteratorHelper3(logs[0].split(/[\n\r]+/)), _step2;
+        var prefs = /* @__PURE__ */ new Map(), prefRegex = /^Preference (.+?) changed from (?:.*?) to (.*)$/, startedSession = !1, username = (0, import_kolmafia7.myName)(), _iterator2 = _createForOfIteratorHelper3(logs[0].split(/[\n\r]+/)), _step2;
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
-            var line = _step2.value, match = line.match(prefRegex);
+            var line = _step2.value;
+            if (line.toLowerCase() === "Initializing session for ".concat(username, "...").toLowerCase()) {
+              if (startedSession)
+                break;
+              startedSession = !0;
+            } else
+              line.toLowerCase() === "Closing session for ".concat(username, "...").toLowerCase() && (startedSession = !1);
+            var match = line.match(prefRegex);
             match !== null && prefs.set(match[1], match[2]);
           }
         } catch (err) {
